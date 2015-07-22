@@ -30,7 +30,9 @@ class HyperPyCon:
 		self.jsonServer = HyperionConfigSections.json_serverd
 		self.protoServer = HyperionConfigSections.proto_serverd
 		self.grabber = HyperionConfigSections.GrabberV4l2()
-	
+
+		self.tester = HyperionConfigTester.HyperionConfigTester(self.led_chain)
+
 	def create_config(self, add_grabber):
 		self.color.add_transformation(self.transform)
 		self.color.set_smoothing(self.smoothing)
@@ -46,10 +48,10 @@ class HyperPyCon:
 			jsonServer = self.jsonServer, 
 			protoServer = self.protoServer, 
 			endOfJson = 'endOfJson')
-		
+
 		if add_grabber:
 			hyperion_config_dict.update(OrderedDict(grabber_v4l2 = HyperionConfigSections.GrabberV4l2().to_dict()))
-			
+
 		return json.dumps(hyperion_config_dict,sort_keys=False,indent=4, separators=(',', ': ')).replace("grabber_v4l2","grabber-v4l2")
 
 	def save_config_file(self,content,folder,file_name):
@@ -63,8 +65,7 @@ class HyperPyCon:
 			config_folder = "/storage/.config/"
 		else:
 			config_folder = "/etc/"
-			raise "It is not OE"
-		#return config_folder+"hyperion_config_json" + config_folder+"hyperion_config_json_bak"
+
 		shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")
 		shutil.copyfile(self.config_file_path,config_folder+"hyperion.config.json")
 
@@ -75,10 +76,18 @@ class HyperPyCon:
 			self.grabber.height = 192
 			self.grabber.frame_decimation = 2
 			self.grabber.size_decimation = 20
-			
-	def restart_hyperion(self,hyperion_config_file_name):
-		HyperionConfigTester.HyperionConfigTester().restart_hyperion(hyperion_config_file_name)
 
+	def restart_hyperion(self,hyperion_config_file_name):
+		self.tester.restart_hyperion(hyperion_config_file_name)
+
+	def test_corners(self,duration):
+		self.tester.connect_to_hyperion()
+		self.tester.mark_corners()
+		self.tester.change_colors()
+		time.sleep(duration)
+		self.tester.disconnect()
+
+		
 
 
 #h = HyperPyCon(23,23)

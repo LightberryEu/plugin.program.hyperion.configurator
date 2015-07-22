@@ -7,13 +7,13 @@
 		<provides>executable</provides>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">Popup Hello World</summary>
-		<description lang="en">Example Plugin to show hello world</description>
+		<platform>linux</platform>
+		<summary lang="en">Hyperion configuration wizard</summary>
+		<description lang="en">Easy to use wizard for vanilla users to create their hyperion config file easily.</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
-		<forum>http://forum.kodi.tv/showthread.php?tid=209948</forum>
-		<source>https://github.com/zag2me/plugin.program.hello.world</source>
-		<email>zag@kodi.org</email>
+		<forum>https://github.com/LightberryEu/plugin.program.hyperion.configurator/issues</forum>
+		<source>https://github.com/LightberryEu/plugin.program.hyperion.configurator</source>
+		<email>jacek@lightberry.eu</email>
 	</extension>
 </addon>

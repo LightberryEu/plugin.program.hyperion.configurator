@@ -1,48 +1,39 @@
 import xbmc
 import os
 import sys
-
-
-
 import xbmcaddon
 import xbmcgui
 import time
 import subprocess
+
 addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
 addon_dir = xbmc.translatePath( addon.getAddonInfo('path') )
-#xbmcgui.Dialog().ok(addonname, os.path.join( addon_dir, 'resources', 'lib' ))
 sys.path.append(os.path.join( addon_dir, 'resources', 'lib' ) )
-try:
-	import HyperPyCon 
-except Exception, e:
-        xbmcgui.Dialog().ok(addonname, repr(e)[50:])
+import HyperPyCon 
 
 line1 = "Welcome!"
-line2 = "We are about to prepare your hyperion config file in this step-by-step wizard..."
-line3 = "You must complete all steps to have the config file generated.... Lets start!"
+line2 = "We are about to prepare your hyperion config file in this step-by-step wizard."
+line3 = "You must complete all steps to have the config file generated. Let\'s start!"
 
-zupa = xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
-#if not zupa:
-#	return
+xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
+
 try:
 	if "spidev" not in subprocess.check_output(['ls','/dev']):
-		xbmcgui.Dialog().ok(addonname, "We have detected that your system does not have spi enabled. You can still continue but leds may not work if you're using GPIO connection.")
-
-
+		xbmcgui.Dialog().ok(addonname, "We have detected that your system does not have spi enabled. You can still continue, but leds may not work if you're using GPIO/SPI connection."+
+			" For USB connection you are safe to proceed")
 
 	xbmcgui.Dialog().ok(addonname, "In next two steps please provovide number of leds at the top edge of tv (horizontally)" +
 		"  and number of leds at the side of your tv (count leds at single side only) - horizontally")
 
-
 	nol_horizontal = xbmcgui.Dialog().input("Select number of leds horizontally","16",xbmcgui.INPUT_NUMERIC)
 	nol_vertical = xbmcgui.Dialog().input("Select number of leds vertically","9",xbmcgui.INPUT_NUMERIC)
-#	xbmcgui.Dialog().ok(addonname,str(nol_horizontal),str(nol_vertical))
+
 	hyperion_configuration = HyperPyCon.HyperPyCon(int(nol_horizontal), int(nol_vertical))
 
 	options = ["Right bottom corner and goes up","Left bottom corner and goes up"]
 	selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
-	
+
 	if options[selected_index] == "Left bottom corner and goes up":
 		hyperion_configuration.led_chain.reverse_direction()
 		hyperion_configuration.led_chain.set_offset(int(nol_horizontal))
@@ -70,11 +61,17 @@ try:
 	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl?"):
 		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error...")
 		sys.exit()
-	
+	else:
+		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see leds in 3 corners marked with different colors. Check if they are exactly in the corners."+
+			" If not, start this wizard again and provide correct numbers of leds horizontally and vertically.")
+		hyperion_configuration.test_corners(10)
+
 	if xbmcgui.Dialog().yesno(addonname, "Do you want us to save this config as your default one?","(if No, changes will be lost after hyperion/system restart)"):
 		hyperion_configuration.overwrite_default_config()
+	elif xbmcgui.Dialog().yesno(addonname, "Hyperion is now running with the newly created config. Would you like to restart hyperion with previous config?"):
+		hyperion_configuration.restart_hyperion("hyperion.config.json")
 
-	xbmcgui.Dialog().ok(addonname, "[To be added] All hyperion settings are available in the settings of this addon. Enjoy!")
+	xbmcgui.Dialog().ok(addonname, "That\'s all Folks! :) . Enjoy!")
 
 except Exception, e:
         xbmcgui.Dialog().ok(addonname, repr(e))
