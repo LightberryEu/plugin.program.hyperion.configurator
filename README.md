@@ -9,3 +9,8 @@ For more advanced settings, user should edit the file manually.
 We hope this will be useful for many users :)
 
 Lightberry Team
+
+TODO:
+- better error handling
+- corner test in separate thread
+- offset to enable setup with first led in the middle of bottom edge of tv
