@@ -48,8 +48,8 @@ try:
 
 	if grabber != "":
 		if "video0" in subprocess.check_output(['ls','/dev']):
-			xbmcgui.Dialog().ok(addonname, "Compatible video grabber has been detected. We will add appropriate section to the config file.")
-			hyperion_configuration.config_grabber(grabber)
+			if xbmcgui.Dialog().yesno(addonname, "Compatible video grabber has been detected. Do you want to enable video grabber in hyperion?"):
+				hyperion_configuration.config_grabber(grabber)
 		else:
 			xbmcgui.Dialog().ok(addonname, "Video grabber has been detected but video0 does not exist. Please install drivers or use different disto")
 	else:
