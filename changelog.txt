@@ -1,3 +1,3 @@
 1.0.0 Initial Release
 
-1.0.1 Bug Fixes (issue#1 + few more :) )
+1.0.1 Bug fixes + control image added + bottom/center configuration added

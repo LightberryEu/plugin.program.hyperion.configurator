@@ -19,24 +19,35 @@ line3 = "You must complete all steps to have the config file generated. Let\'s s
 xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
 
 try:
-	if "spidev" not in subprocess.check_output(['ls','/dev']):
-		xbmcgui.Dialog().ok(addonname, "We have detected that your system does not have spi enabled. You can still continue, but leds may not work if you're using GPIO/SPI connection."+
-			" For USB connection you are safe to proceed")
+
+	device_versions = [ HyperPyCon.HyperPyCon.ws2801 , HyperPyCon.HyperPyCon.adalight ]
+	selected_device = xbmcgui.Dialog().select("Select your led device:",device_versions)
+	if selected_device == 0:	
+		if "spidev" not in subprocess.check_output(['ls','/dev']):
+			xbmcgui.Dialog().ok(addonname, "We have detected that your system does not have spi enabled. You can still continue, but leds may not work if you're using GPIO/SPI connection")
 
 	xbmcgui.Dialog().ok(addonname, "In next two steps please provovide number of leds at the top edge of tv (horizontally)" +
 		"  and number of leds at the side of your tv (count leds at single side only) - horizontally")
 
-	nol_horizontal = xbmcgui.Dialog().input("Select number of leds horizontally","16",xbmcgui.INPUT_NUMERIC)
-	nol_vertical = xbmcgui.Dialog().input("Select number of leds vertically","9",xbmcgui.INPUT_NUMERIC)
+	nol_horizontal = xbmcgui.Dialog().input("Select number of leds horizontally","29",xbmcgui.INPUT_NUMERIC)
+	nol_vertical = xbmcgui.Dialog().input("Select number of leds vertically","16",xbmcgui.INPUT_NUMERIC)
 
 	hyperion_configuration = HyperPyCon.HyperPyCon(int(nol_horizontal), int(nol_vertical))
+	hyperion_configuration.set_device_type(device_versions[selected_device])
 
-	options = ["Right bottom corner and goes up","Left bottom corner and goes up"]
+	options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
 	selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
 
-	if options[selected_index] == "Left bottom corner and goes up":
+	if selected_index == 1:
 		hyperion_configuration.led_chain.reverse_direction()
 		hyperion_configuration.led_chain.set_offset(int(nol_horizontal))
+	elif selected_index == 2 or selected_index == 3:
+		offset = xbmcgui.Dialog().input("How many leds from the center to the corner or the screen?","15",xbmcgui.INPUT_NUMERIC)
+		if selected_index == 2:
+			hyperion_configuration.led_chain.set_offset((-1)*int(offset))
+		else:
+			hyperion_configuration.led_chain.reverse_direction()
+			hyperion_configuration.led_chain.set_offset(int(offset))
 
 	grabber = ""
 	lsusb_output = subprocess.check_output('lsusb')
@@ -64,7 +75,17 @@ try:
 	else:
 		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see leds in 3 corners marked with different colors. Check if they are exactly in the corners."+
 			" If not, start this wizard again and provide correct numbers of leds horizontally and vertically.")
-		hyperion_configuration.test_corners(10)
+		#hyperion_configuration.test_corners(10)
+		okno = xbmcgui.WindowDialog(xbmcgui.getCurrentWindowId())
+		#obrazek = xbmcgui.ControlImage(0,0,okno.getWidth(),okno.getHeight(),addon_dir+"/test_picture.png")
+		obrazek = xbmcgui.ControlImage(0,0,1280,720,addon_dir+"/test_picture.png")
+		okno.addControl(obrazek)
+		okno.show()
+		obrazek.setVisible(True)
+		hyperion_configuration.show_test_image(addon_dir+"/test_picture.png")
+		time.sleep(10)
+		okno.close()
+		hyperion_configuration.clear_leds()
 
 	if xbmcgui.Dialog().yesno(addonname, "Do you want us to save this config as your default one?","(if No, changes will be lost after hyperion/system restart)"):
 		hyperion_configuration.overwrite_default_config()

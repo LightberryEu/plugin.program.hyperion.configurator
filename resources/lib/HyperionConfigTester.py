@@ -12,9 +12,11 @@ class HyperionConfigTester:
 		if os.uname()[1] == "OpenELEC":
 			self.hyperion_path = "/storage/hyperion/bin/hyperiond.sh"
 			self.config_folder = "/storage/.config/"
+			self.hyperion_remote_path = "/storage/hyperion/bin/hyperion-remote.sh"
 		else: #not tested
 			self.hyperion_path = "hyperiond"
 			self.config_folder = "/etc/"
+			self.hyperion_remote_path = "hyperion-remote"
 
 	def restart_hyperion(self,config_file_name):
 		subprocess.call(["killall", "hyperiond"])
@@ -38,3 +40,9 @@ class HyperionConfigTester:
 
 	def disconnect(self):
 		self.connection.disconnect()
+
+	def show_test_image(self, test_image_path):
+		 subprocess.Popen([self.hyperion_remote_path,"-i", test_image_path])
+
+	def clear_leds(self):
+		subprocess.Popen([self.hyperion_remote_path,"-c", "000000"])

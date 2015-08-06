@@ -10,6 +10,8 @@ import os
 import shutil
 
 class HyperPyCon:
+	ws2801 = "Lightberry for Raspberry Pi"
+	adalight = "Lightberry USB"
 	def __init__(self, nol_horizontal, nol_vertical):
 		self.total_number_of_leds = ((nol_horizontal + nol_vertical) * 2)
 		self.led_chain = LedChain(self.total_number_of_leds)
@@ -32,6 +34,11 @@ class HyperPyCon:
 		self.grabber = HyperionConfigSections.GrabberV4l2()
 
 		self.tester = HyperionConfigTester.HyperionConfigTester(self.led_chain)
+
+	def set_device_type(self,device_type):
+		if device_type == HyperPyCon.adalight:
+			self.device.type = "adalight"
+			self.device.output = "/dev/ttyACM0"
 
 	def create_config(self, add_grabber):
 		self.color.add_transformation(self.transform)
@@ -87,7 +94,11 @@ class HyperPyCon:
 		time.sleep(duration)
 		self.tester.disconnect()
 
-		
+	def show_test_image(self, image_path):
+		self.tester.show_test_image(image_path)
+
+	def clear_leds(self):
+		self.tester.clear_leds()		
 
 
 #h = HyperPyCon(23,23)

@@ -106,7 +106,7 @@ class LedChain:
 			for i in range(offset_value):
 				self.leds.append(self.leds.pop(0))
 		elif offset_value < 0:
-			for i in range(offset_value):
+			for i in range((-1)*offset_value):
 				self.leds.insert(0,self.leds.pop(self.no_of_leds-1))
 									
 	def print_me(self):
