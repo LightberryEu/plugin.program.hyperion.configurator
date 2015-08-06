@@ -14,5 +14,3 @@ Lightberry Team
 
 TODO:
 - better error handling
-- corner test in separate thread
-- offset to enable setup with first led in the middle of bottom edge of tv
