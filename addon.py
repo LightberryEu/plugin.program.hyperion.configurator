@@ -73,7 +73,7 @@ try:
 		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error...")
 		sys.exit()
 	else:
-		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see leds in 3 corners marked with different colors. Check if they are exactly in the corners."+
+		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see test image and leds should adjust to that image. Check if the leds are showing the right colors in the right places."+
 			" If not, start this wizard again and provide correct numbers of leds horizontally and vertically.")
 		#hyperion_configuration.test_corners(10)
 		okno = xbmcgui.WindowDialog(xbmcgui.getCurrentWindowId())
