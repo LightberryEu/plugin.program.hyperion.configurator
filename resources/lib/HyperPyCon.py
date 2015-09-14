@@ -12,6 +12,7 @@ import shutil
 class HyperPyCon:
 	ws2801 = "Lightberry for Raspberry Pi"
 	adalight = "Lightberry USB"
+	apa102 = "Lightberry HD APA"
 	def __init__(self, nol_horizontal, nol_vertical):
 		self.total_number_of_leds = ((nol_horizontal + nol_vertical) * 2)
 		self.led_chain = LedChain(self.total_number_of_leds)
@@ -39,6 +40,20 @@ class HyperPyCon:
 		if device_type == HyperPyCon.adalight:
 			self.device.type = "adalight"
 			self.device.output = "/dev/ttyACM0"
+		elif device_type == HyperPyCon.apa102:
+			self.device.type = "apa102"
+			
+	def set_device_rate(self, rate):
+		self.device.rate = rate
+		
+	def set_color_values(self,threshold, gamma, blacklevel,whitelevel, color_name):
+		self.transform.set_color_transformation(HyperionConfigSections.SingleColor(threshold,gamma,blacklevel,whitelevel), color_name)
+		
+	def set_smoothing(self, type, time_ms, update_frequency):
+		self.smoothing = HyperionConfigSections.Smoothing(type,time_ms,update_frequency)
+		
+	def set_blackborderdetection(self,enabled,bbdthreshold):
+		self.blackborderdetector = dict(enable = enabled, threshold = bbdthreshold)
 
 	def create_config(self, add_grabber):
 		self.color.add_transformation(self.transform)

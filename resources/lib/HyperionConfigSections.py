@@ -12,7 +12,7 @@ class Device:
 	name = "MyPi"
 	type = "ws2801"
 	output = "/dev/spidev0.0"
-	rate = 250000
+	rate = 500000
 	color_order = "rgb"
 
 	def __init__(self):
@@ -61,7 +61,7 @@ class Transform:
 	hsv = None
 
 	def __init__(self,tranformation_id, leds_indexes_range, hsv, red, green, blue):
-		"""red,green,blue must be isntances of SingleColorParms"""
+		"""red,green,blue must be instances of SingleColorParms"""
 		self.tranformation_id = tranformation_id
 		self.leds_indexes_range = leds_indexes_range
 		self.red = red
@@ -71,6 +71,15 @@ class Transform:
 
 	def to_dict(self):
 		return OrderedDict(id = self.tranformation_id, leds = self.leds_indexes_range, hsv = self.hsv.to_dict(), red = self.red.to_dict(), green = self.green.to_dict(), blue = self.blue.to_dict())
+		
+	def set_color_transformation(self, single_color_settings, color_name):
+		if color_name == "GREEN":
+			self.green = single_color_settings
+		elif color_name == "RED":
+			self.red = single_color_settings
+		else:	
+			self.blue = single_color_settings
+			
 
 class Smoothing:
 	type = 'linear'

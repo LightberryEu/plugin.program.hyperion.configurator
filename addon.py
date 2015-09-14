@@ -20,7 +20,7 @@ xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
 
 try:
 
-	device_versions = [ HyperPyCon.HyperPyCon.ws2801 , HyperPyCon.HyperPyCon.adalight ]
+	device_versions = [ HyperPyCon.HyperPyCon.ws2801 , HyperPyCon.HyperPyCon.adalight, HyperPyCon.HyperPyCon.apa102]
 	selected_device = xbmcgui.Dialog().select("Select your led device:",device_versions)
 	if selected_device == 0:	
 		if "spidev" not in subprocess.check_output(['ls','/dev']):
@@ -34,7 +34,13 @@ try:
 
 	hyperion_configuration = HyperPyCon.HyperPyCon(int(nol_horizontal), int(nol_vertical))
 	hyperion_configuration.set_device_type(device_versions[selected_device])
-
+	hyperion_configuration.set_device_rate(int(addon.getSetting("rate")))
+	hyperion_configuration.set_color_values(float(addon.getSetting("redThreshold")), float(addon.getSetting("redGamma")),float(addon.getSetting("redBlacklevel")),float(addon.getSetting("redWhitelevel")),"RED")
+	hyperion_configuration.set_color_values(float(addon.getSetting("greenThreshold")), float(addon.getSetting("greenGamma")),float(addon.getSetting("greenBlacklevel")),float(addon.getSetting("greenWhitelevel")),"GREEN")
+	hyperion_configuration.set_color_values(float(addon.getSetting("blueThreshold")), float(addon.getSetting("blueGamma")),float(addon.getSetting("blueBlacklevel")),float(addon.getSetting("blueWhitelevel")),"BLUE")
+	hyperion_configuration.set_smoothing(addon.getSetting("smoothingType"),int(addon.getSetting("smoothingTime")),int(addon.getSetting("smoothingFreq")))
+	hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
+	
 	options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
 	selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
 
@@ -70,7 +76,7 @@ try:
 	hyperion_configuration.save_config_file(hyperion_configuration.create_config(grabber),"/storage/.config/","hyperion.config.new")
 	hyperion_configuration.restart_hyperion("hyperion.config.new")
 	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl?"):
-		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error...")
+		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... (on openelec: /storage/hyperion/bin/hyperiond.sh /storage/.config/hyperion.config.new)")
 		sys.exit()
 	else:
 		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see test image and leds should adjust to that image. Check if the leds are showing the right colors in the right places."+
@@ -92,9 +98,9 @@ try:
 	elif xbmcgui.Dialog().yesno(addonname, "Hyperion is now running with the newly created config. Would you like to restart hyperion with previous config?"):
 		hyperion_configuration.restart_hyperion("hyperion.config.json")
 
-	xbmcgui.Dialog().ok(addonname, "That\'s all Folks! :) . Enjoy!")
+	xbmcgui.Dialog().ok(addonname, "That\'s all Folks! :) . Enjoy!", "If you'd like to fine tune advanced parameters, please modify addon settings before running it")
 
 except Exception, e:
-        xbmcgui.Dialog().ok(addonname, repr(e))
+        xbmcgui.Dialog().ok(addonname, repr(e),"Please report an error at github issue list")
 
 
