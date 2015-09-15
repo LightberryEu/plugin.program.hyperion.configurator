@@ -83,7 +83,7 @@ class HyperPyCon:
 		f.close()
 
 	def overwrite_default_config(self):
-		if os.uname()[1] == "OpenELEC":
+		if os.path.isdir("/storage/.config"):
 			config_folder = "/storage/.config/"
 		else:
 			config_folder = "/etc/"
