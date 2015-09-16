@@ -9,7 +9,8 @@ class HyperionConfigTester:
 	led_chain = None
 	def __init__(self, chain = None):
 		self.led_chain = chain
-		if os.uname()[1] == "OpenELEC":
+		#if os.uname()[1] == "OpenELEC":
+		if os.path.isdir("/storage/.config"):
 			self.hyperion_path = "/storage/hyperion/bin/hyperiond.sh"
 			self.config_folder = "/storage/.config/"
 			self.hyperion_remote_path = "/storage/hyperion/bin/hyperion-remote.sh"
