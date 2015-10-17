@@ -3,8 +3,9 @@ from collections import OrderedDict
 
 blackborderdetectord = dict(enable = True, threshold = 0.05)
 effectsd = dict(paths = ["/storage/hyperion/effects"])
-bootsequenced = dict(effect = "Rainbow swirl fast", duration_ms = 1000)
+bootsequenced = dict(effect = "Rainbow swirl fast", duration_ms = 3000)
 framegrabberd = dict(width = 64, height = 64, frequency_Hz = 10.0)
+amlgrabberd = dict(width = 64, height = 64, frequency_Hz = 20.0)
 json_serverd = dict(port = 19444)
 proto_serverd = dict(port = 19445)
 

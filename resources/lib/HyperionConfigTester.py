@@ -2,6 +2,7 @@ from json_client import JsonClient
 import subprocess
 import os
 
+
 class HyperionConfigTester:
 	connection = None
 	hyperion_path = ""
@@ -9,19 +10,21 @@ class HyperionConfigTester:
 	led_chain = None
 	def __init__(self, chain = None):
 		self.led_chain = chain
-		#if os.uname()[1] == "OpenELEC":
 		if os.path.isdir("/storage/.config"):
 			self.hyperion_path = "/storage/hyperion/bin/hyperiond.sh"
 			self.config_folder = "/storage/.config/"
 			self.hyperion_remote_path = "/storage/hyperion/bin/hyperion-remote.sh"
+			self.sudo = ""
 		else: #not tested
 			self.hyperion_path = "hyperiond"
 			self.config_folder = "/etc/"
 			self.hyperion_remote_path = "hyperion-remote"
+			self.sudo = "sudo "
 
-	def restart_hyperion(self,config_file_name):
+	def restart_hyperion(self,hyperion_config_path):
 		subprocess.call(["killall", "hyperiond"])
-		subprocess.Popen([self.hyperion_path, self.config_folder+config_file_name])
+		#subprocess.call(["kill","-9",subprocess.check_output(["pidof","-s","hyperiond"])])
+		subprocess.Popen([self.hyperion_path, hyperion_config_path])
 
 	def connect_to_hyperion(self):	
 		"""Connects to local hyperion"""

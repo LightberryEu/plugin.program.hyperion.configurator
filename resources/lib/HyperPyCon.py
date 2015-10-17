@@ -10,9 +10,11 @@ import os
 import shutil
 
 class HyperPyCon:
-	ws2801 = "Lightberry for Raspberry Pi"
-	adalight = "Lightberry USB"
-	apa102 = "Lightberry HD APA"
+	ws2801 = "Lightberry HD for Raspberry Pi (ws2801)"
+	apa102 = "Lightberry HD for Raspberry Pi (apa102)"
+	adalight = "Lightberry HD USB (ws2801)"	
+	adalightapa102 = "Lightberry HD USB (apa102)"
+
 	def __init__(self, nol_horizontal, nol_vertical):
 		self.total_number_of_leds = ((nol_horizontal + nol_vertical) * 2)
 		self.led_chain = LedChain(self.total_number_of_leds)
@@ -28,13 +30,23 @@ class HyperPyCon:
 		self.blackborderdetector = HyperionConfigSections.blackborderdetectord
 		self.effects = HyperionConfigSections.effectsd
 		self.bootsequence = HyperionConfigSections.bootsequenced
-		self.framegrabber = HyperionConfigSections.framegrabberd
+		if HyperPyCon.amIonWetek():
+			self.amlgrabber = HyperionConfigSections.amlgrabberd
+		else:
+			self.framegrabber = HyperionConfigSections.framegrabberd
+			self.grabber = HyperionConfigSections.GrabberV4l2()
 		self.xbmcVideoChecker = HyperionConfigSections.XBMCVideoChecker()
 		self.jsonServer = HyperionConfigSections.json_serverd
 		self.protoServer = HyperionConfigSections.proto_serverd
-		self.grabber = HyperionConfigSections.GrabberV4l2()
-
+		
 		self.tester = HyperionConfigTester.HyperionConfigTester(self.led_chain)
+
+	@staticmethod
+	def amIonWetek():
+		if "Amlogic" in open("/proc/cpuinfo").read():
+			return True
+		else:
+			return False
 
 	def set_device_type(self,device_type):
 		if device_type == HyperPyCon.adalight:
@@ -42,9 +54,14 @@ class HyperPyCon:
 			self.device.output = "/dev/ttyACM0"
 		elif device_type == HyperPyCon.apa102:
 			self.device.type = "apa102"
+			self.device.color_order = "bgr"
+		elif device_type == HyperPyCon.adalightapa102:
+			self.device.type = "adalightapa102"
+			self.device.output = "/dev/ttyACM0"
+			self.device.color_order = "bgr"
 			
 	def set_device_rate(self, rate):
-		self.device.rate = rate
+		self.device.rate = rate			
 		
 	def set_color_values(self,threshold, gamma, blacklevel,whitelevel, color_name):
 		self.transform.set_color_transformation(HyperionConfigSections.SingleColor(threshold,gamma,blacklevel,whitelevel), color_name)
@@ -58,27 +75,41 @@ class HyperPyCon:
 	def create_config(self, add_grabber):
 		self.color.add_transformation(self.transform)
 		self.color.set_smoothing(self.smoothing)
-		hyperion_config_dict = OrderedDict(
-			device = self.device.to_dict(), 
-			color = self.color.to_dict(), 
-			leds = self.led_chain.get_list_of_leds_dicts(),
-			blackborderdetector = self.blackborderdetector, 
-			effects = self.effects, 
-			bootsequence = self.bootsequence,
-			framegrabber = self.framegrabber, 
-			xbmcVideoChecker = self.xbmcVideoChecker.to_dict(), 
-			jsonServer = self.jsonServer, 
-			protoServer = self.protoServer, 
-			endOfJson = 'endOfJson')
+		if HyperPyCon.amIonWetek():
+			hyperion_config_dict = OrderedDict(
+				device = self.device.to_dict(), 
+				color = self.color.to_dict(), 
+				leds = self.led_chain.get_list_of_leds_dicts(),
+				blackborderdetector = self.blackborderdetector, 
+				effects = self.effects, 
+				bootsequence = self.bootsequence,
+				amlgrabber = self.amlgrabber, 
+				xbmcVideoChecker = self.xbmcVideoChecker.to_dict(), 
+				jsonServer = self.jsonServer, 
+				protoServer = self.protoServer, 
+				endOfJson = 'endOfJson')
+		else:		
+			hyperion_config_dict = OrderedDict(
+				device = self.device.to_dict(), 
+				color = self.color.to_dict(), 
+				leds = self.led_chain.get_list_of_leds_dicts(),
+				blackborderdetector = self.blackborderdetector, 
+				effects = self.effects, 
+				bootsequence = self.bootsequence,
+				framegrabber = self.framegrabber, 
+				xbmcVideoChecker = self.xbmcVideoChecker.to_dict(), 
+				jsonServer = self.jsonServer, 
+				protoServer = self.protoServer, 
+				endOfJson = 'endOfJson')
 
 		if add_grabber:
 			hyperion_config_dict.update(OrderedDict(grabber_v4l2 = HyperionConfigSections.GrabberV4l2().to_dict()))
 
 		return json.dumps(hyperion_config_dict,sort_keys=False,indent=4, separators=(',', ': ')).replace("grabber_v4l2","grabber-v4l2")
 
-	def save_config_file(self,content,folder,file_name):
-		self.config_file_path = folder+file_name
-		f = open(folder+file_name,"w", 0777)
+	def save_config_file(self,content,file_path):
+		self.config_file_path = file_path
+		f = open(file_path,"w", 0777)
 		f.write(content)
 		f.close()
 
@@ -89,7 +120,7 @@ class HyperPyCon:
 			config_folder = "/etc/"
 
 		shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")
-		shutil.copyfile(self.config_file_path,config_folder+"hyperion.config.json")
+		shutil.copyfile(self.new_hyperion_config_path,config_folder+"hyperion.config.json")
 
 	def config_grabber(self,grabber_model):
 		"""setting grabber specific parameters. utv007 model is default"""
@@ -99,8 +130,9 @@ class HyperPyCon:
 			self.grabber.frame_decimation = 2
 			self.grabber.size_decimation = 20
 
-	def restart_hyperion(self,hyperion_config_file_name):
-		self.tester.restart_hyperion(hyperion_config_file_name)
+	def restart_hyperion(self,hyperion_config_path):
+		self.new_hyperion_config_path = hyperion_config_path
+		self.tester.restart_hyperion(hyperion_config_path)
 
 	def test_corners(self,duration):
 		self.tester.connect_to_hyperion()

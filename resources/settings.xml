@@ -26,12 +26,12 @@
         <setting label="Threshold" type="slider" range="0,0.02,1" id="greenThreshold" default=0.05/>
         <setting label="Gamma" type="slider" range="0,0.2,4"   id="greenGamma" default=2.0/>
         <setting label="Blacklevel" type="slider" id="greenBlacklevel" default="0" range="0,0.02,1" />
-        <setting label="Whitelevel" type="slider" id="greenWhitelevel" default="0.84" range="0,0.02,1" />
+        <setting label="Whitelevel" type="slider" id="greenWhitelevel" default="0.85" range="0,0.02,1" />
 
 	<setting label="Blue" type="lsep"/>
         <setting label="Threshold" type="slider" range="0,0.02,1" id="blueThreshold" default=0.05/>
         <setting label="Gamma" type="slider" range="0,0.2,4"   id="blueGamma" default=2.0/>
         <setting label="Blacklevel" type="slider" id="blueBlacklevel" default="0" range="0,0.02,1" />
-        <setting label="Whitelevel" type="slider" id="blueWhitelevel" default="0.84" range="0,0.02,1" />
+        <setting label="Whitelevel" type="slider" id="blueWhitelevel" default="0.85" range="0,0.02,1" />
     </category>
 </settings>
