@@ -16,6 +16,7 @@ class HyperPyCon:
 	adalightapa102 = "Lightberry HD USB (apa102)"
 
 	def __init__(self, nol_horizontal, nol_vertical):
+		self.grabber_enabled = False
 		self.total_number_of_leds = ((nol_horizontal + nol_vertical) * 2)
 		self.led_chain = LedChain(self.total_number_of_leds)
 		self.led_chain.generate_layout(nol_horizontal, nol_vertical)
@@ -72,7 +73,7 @@ class HyperPyCon:
 	def set_blackborderdetection(self,enabled,bbdthreshold):
 		self.blackborderdetector = dict(enable = enabled, threshold = bbdthreshold)
 
-	def create_config(self, add_grabber):
+	def create_config(self):
 		self.color.add_transformation(self.transform)
 		self.color.set_smoothing(self.smoothing)
 		if HyperPyCon.amIonWetek():
@@ -102,7 +103,7 @@ class HyperPyCon:
 				protoServer = self.protoServer, 
 				endOfJson = 'endOfJson')
 
-		if add_grabber:
+		if self.grabber_enabled:
 			hyperion_config_dict.update(OrderedDict(grabber_v4l2 = HyperionConfigSections.GrabberV4l2().to_dict()))
 
 		return json.dumps(hyperion_config_dict,sort_keys=False,indent=4, separators=(',', ': ')).replace("grabber_v4l2","grabber-v4l2")
@@ -123,6 +124,7 @@ class HyperPyCon:
 		shutil.copyfile(self.new_hyperion_config_path,config_folder+"hyperion.config.json")
 
 	def config_grabber(self,grabber_model):
+		self.grabber_enabled = True
 		"""setting grabber specific parameters. utv007 model is default"""
 		if grabber_model == "stk1160":
 			self.grabber.width = 240

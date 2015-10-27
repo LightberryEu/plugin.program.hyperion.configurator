@@ -92,7 +92,7 @@ try:
 
 			xbmcgui.Dialog().ok(addonname, "We have not detected the grabber. Grabber-v4l2 section will not be added to the config file.")
 	xbmcgui.Dialog().ok(addonname, "That's all! Now we will attempt to restart hyperion...")
-	hyperion_configuration.save_config_file(hyperion_configuration.create_config(grabber),new_hyperion_config_path)	
+	hyperion_configuration.save_config_file(hyperion_configuration.create_config(),new_hyperion_config_path)	
 	hyperion_configuration.restart_hyperion(new_hyperion_config_path)
 
 	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl?"):
