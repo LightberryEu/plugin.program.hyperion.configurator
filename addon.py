@@ -57,7 +57,7 @@ try:
 	hyperion_configuration.set_color_values(float(addon.getSetting("blueThreshold")), float(addon.getSetting("blueGamma")),float(addon.getSetting("blueBlacklevel")),float(addon.getSetting("blueWhitelevel")),"BLUE")
 	hyperion_configuration.set_smoothing(addon.getSetting("smoothingType"),int(addon.getSetting("smoothingTime")),int(addon.getSetting("smoothingFreq")))
 	hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
-	hyperion_configuration.set_grabber_video_standard(ddon.getSetting("videoStandard"))
+	hyperion_configuration.set_grabber_video_standard(addon.getSetting("videoStandard"))
 	
 	options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
 	selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
