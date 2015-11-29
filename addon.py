@@ -98,7 +98,7 @@ try:
 	hyperion_configuration.restart_hyperion(new_hyperion_config_path)
 
 	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl? (sometimes it does not appear, if you're sure that correct led type is selected, answer YES anyway, save config as default and reboot)"):
-		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... (on openelec: /storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator/hyperion.config.new)")
+		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... (on openelec: /storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new)")
 		sys.exit()
 	else:
 		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see test image and leds should adjust to that image. Check if the leds are showing the right colors in the right places."+

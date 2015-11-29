@@ -104,7 +104,7 @@ class HyperPyCon:
 				endOfJson = 'endOfJson')
 
 		if self.grabber_enabled:
-			hyperion_config_dict.update(OrderedDict(grabber_v4l2 = HyperionConfigSections.GrabberV4l2().to_dict()))
+			hyperion_config_dict.update(OrderedDict(grabber_v4l2 = self.grabber.to_dict()))
 
 		return json.dumps(hyperion_config_dict,sort_keys=False,indent=4, separators=(',', ': ')).replace("grabber_v4l2","grabber-v4l2")
 
