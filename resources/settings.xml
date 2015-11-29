@@ -34,4 +34,7 @@
         <setting label="Blacklevel" type="slider" id="blueBlacklevel" default="0" range="0,0.02,1" />
         <setting label="Whitelevel" type="slider" id="blueWhitelevel" default="0.85" range="0,0.02,1" />
     </category>
+	<category label="Grabber">
+	  <setting label="Video standard" type="select" values="PAL|NTSC" id="videoStandard" default="PAL"/>
+    </category>
 </settings>

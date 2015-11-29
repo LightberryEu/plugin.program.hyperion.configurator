@@ -145,6 +145,9 @@ class HyperPyCon:
 
 	def show_test_image(self, image_path):
 		self.tester.show_test_image(image_path)
+		
+	def set_grabber_video_standard(self,standard):
+		self.grabber.standard = standard;
 
 	def clear_leds(self):
 		self.tester.clear_leds()		

@@ -35,6 +35,7 @@ try:
 		suffix = "apa102"
 	else:
 		suffix = "ws2801"
+		
 	xbmcgui.Dialog().ok(addonname, "In next two steps please provide number of leds at the top edge of tv (horizontally)" +
 		"  and number of leds at the side of your tv (count leds at single side only) - horizontally")
 
@@ -56,6 +57,7 @@ try:
 	hyperion_configuration.set_color_values(float(addon.getSetting("blueThreshold")), float(addon.getSetting("blueGamma")),float(addon.getSetting("blueBlacklevel")),float(addon.getSetting("blueWhitelevel")),"BLUE")
 	hyperion_configuration.set_smoothing(addon.getSetting("smoothingType"),int(addon.getSetting("smoothingTime")),int(addon.getSetting("smoothingFreq")))
 	hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
+	hyperion_configuration.set_grabber_video_standard(ddon.getSetting("videoStandard"))
 	
 	options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
 	selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
@@ -95,8 +97,8 @@ try:
 	hyperion_configuration.save_config_file(hyperion_configuration.create_config(),new_hyperion_config_path)	
 	hyperion_configuration.restart_hyperion(new_hyperion_config_path)
 
-	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl?"):
-		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... (on openelec: /storage/hyperion/bin/hyperiond.sh /storage/.config/hyperion.config.new)")
+	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl? (sometimes it does not appear, if you're sure that correct led type is selected, answer YES anyway, save config as default and reboot)"):
+		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... (on openelec: /storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator/hyperion.config.new)")
 		sys.exit()
 	else:
 		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see test image and leds should adjust to that image. Check if the leds are showing the right colors in the right places."+
@@ -111,7 +113,7 @@ try:
 		okno.close()
 		hyperion_configuration.clear_leds()
 
-	if xbmcgui.Dialog().yesno(addonname, "Do you want us to save this config as your default one?","(if No, changes will be lost after hyperion/system restart)"):
+	if xbmcgui.Dialog().yesno(addonname, "Do you want to save this config as your default one?","(if No, changes will be lost after hyperion/system restart)"):
 		hyperion_configuration.overwrite_default_config()
 	elif xbmcgui.Dialog().yesno(addonname, "Hyperion is now running with the newly created config. Would you like to restart hyperion with previous config?"):
 		hyperion_configuration.restart_hyperion(new_hyperion_config_path)
