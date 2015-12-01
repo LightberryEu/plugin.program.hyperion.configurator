@@ -58,7 +58,7 @@ try:
 	hyperion_configuration.set_smoothing(addon.getSetting("smoothingType"),int(addon.getSetting("smoothingTime")),int(addon.getSetting("smoothingFreq")))
 	hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
 	hyperion_configuration.set_grabber_video_standard(addon.getSetting("videoStandard"))
-	
+
 	options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
 	selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
 
@@ -90,9 +90,8 @@ try:
 			else:
 				xbmcgui.Dialog().ok(addonname, "Video grabber has been detected but video0 does not exist. Please install drivers or use different disto")
 		else:
-
-
 			xbmcgui.Dialog().ok(addonname, "We have not detected the grabber. Grabber-v4l2 section will not be added to the config file.")
+			
 	xbmcgui.Dialog().ok(addonname, "That's all! Now we will attempt to restart hyperion...")
 	hyperion_configuration.save_config_file(hyperion_configuration.create_config(),new_hyperion_config_path)	
 	hyperion_configuration.restart_hyperion(new_hyperion_config_path)

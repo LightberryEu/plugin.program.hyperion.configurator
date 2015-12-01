@@ -128,9 +128,20 @@ class HyperPyCon:
 		"""setting grabber specific parameters. utv007 model is default"""
 		if grabber_model == "stk1160":
 			self.grabber.width = 240
-			self.grabber.height = 192
+			if self.grabber.standard == "PAL":
+				self.grabber.height = 192
+			else:
+				self.grabber.height = 160
 			self.grabber.frame_decimation = 2
-			self.grabber.size_decimation = 20
+			self.grabber.size_decimation = 2
+		else:
+			self.grabber.width = 720
+			if self.grabber.standard == "PAL":
+				self.grabber.height = 576
+			else:
+				self.grabber.height = 480
+			self.grabber.frame_decimation = 2
+			self.grabber.size_decimation = 8	
 
 	def restart_hyperion(self,hyperion_config_path):
 		self.new_hyperion_config_path = hyperion_config_path
