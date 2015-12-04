@@ -12,6 +12,7 @@ addonname   = addon.getAddonInfo('name')
 addon_dir = xbmc.translatePath( addon.getAddonInfo('path') )
 sys.path.append(os.path.join( addon_dir, 'resources', 'lib' ) )
 new_hyperion_config_path = addon_dir+"/hyperion.config.new"
+settings_cache_path = "/storage/.kodi/userdata/addon_data/plugin.program.hyperion.configurator/settings.xml"
 import HyperPyCon 
 
 line1 = "Welcome!"
@@ -47,6 +48,8 @@ try:
 			f = open(addon_dir+"/resources/settings.xml","w")
 			f.write(settingsxml)
 			f.close()
+			if os.path.isfile(settings_cache_path):
+				os.remove(settings_cache_path)
 		except Exception, e:
 			xbmcgui.Dialog().ok(addonname, repr(e),"Couldnt download the settings - I will use default.")			
 	hyperion_configuration = HyperPyCon.HyperPyCon(int(nol_horizontal), int(nol_vertical))

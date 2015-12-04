@@ -18,21 +18,21 @@
     <category label="Color">
 	<setting label="Red" type="lsep"/>
         <setting label="Threshold" type="slider" range="0,0.02,1" id="redThreshold" default=0.05/>
-        <setting label="Gamma" type="slider" range="0,0.2,4"   id="redGamma" default=2.0/>
+        <setting label="Gamma" type="slider" range="0,0.2,4"   id="redGamma" default=2.7/>
         <setting label="Blacklevel" type="slider" id="redBlacklevel" default="0" range="0,0.02,1" />
-        <setting label="Whitelevel" type="slider" id="redWhitelevel" default="1.0" range="0,0.02,1" />
+        <setting label="Whitelevel" type="slider" id="redWhitelevel" default="0.85" range="0,0.02,1" />
 
         <setting label="Green" type="lsep"/>
         <setting label="Threshold" type="slider" range="0,0.02,1" id="greenThreshold" default=0.05/>
-        <setting label="Gamma" type="slider" range="0,0.2,4"   id="greenGamma" default=2.0/>
+        <setting label="Gamma" type="slider" range="0,0.2,4"   id="greenGamma" default=2.6/>
         <setting label="Blacklevel" type="slider" id="greenBlacklevel" default="0" range="0,0.02,1" />
-        <setting label="Whitelevel" type="slider" id="greenWhitelevel" default="0.85" range="0,0.02,1" />
+        <setting label="Whitelevel" type="slider" id="greenWhitelevel" default="1.00" range="0,0.02,1" />
 
 	<setting label="Blue" type="lsep"/>
         <setting label="Threshold" type="slider" range="0,0.02,1" id="blueThreshold" default=0.05/>
-        <setting label="Gamma" type="slider" range="0,0.2,4"   id="blueGamma" default=2.0/>
+        <setting label="Gamma" type="slider" range="0,0.2,4"   id="blueGamma" default=2.6/>
         <setting label="Blacklevel" type="slider" id="blueBlacklevel" default="0" range="0,0.02,1" />
-        <setting label="Whitelevel" type="slider" id="blueWhitelevel" default="0.85" range="0,0.02,1" />
+        <setting label="Whitelevel" type="slider" id="blueWhitelevel" default="1.00" range="0,0.02,1" />
     </category>
 	<category label="Grabber">
 	  <setting label="Video standard" type="select" values="PAL|NTSC" id="videoStandard" default="PAL"/>

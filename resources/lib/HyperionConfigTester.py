@@ -49,4 +49,4 @@ class HyperionConfigTester:
 		 subprocess.Popen([self.hyperion_remote_path,"-i", test_image_path])
 
 	def clear_leds(self):
-		subprocess.Popen([self.hyperion_remote_path,"-c", "000000"])
+		subprocess.Popen([self.hyperion_remote_path,"--clearall"])
