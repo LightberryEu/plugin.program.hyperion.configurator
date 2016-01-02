@@ -13,6 +13,8 @@ addon_dir = xbmc.translatePath( addon.getAddonInfo('path') )
 sys.path.append(os.path.join( addon_dir, 'resources', 'lib' ) )
 new_hyperion_config_path = addon_dir+"/hyperion.config.new"
 settings_cache_path = "/storage/.kodi/userdata/addon_data/plugin.program.hyperion.configurator/settings.xml"
+default_config_path="/storage/.config/hyperion.config.json"
+run_command="/storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new"
 import HyperPyCon 
 
 line1 = "Welcome!"
@@ -20,6 +22,23 @@ line2 = "We are about to prepare your hyperion config file in this step-by-step 
 line3 = "You must complete all steps to have the config file generated. Let\'s start!"
 
 xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
+
+try:
+	if HyperPyCon.HyperPyCon.amIonOSMC():
+		settings_cache_path = "/home/osmc/.kodi/userdata/addon_data/plugin.program.hyperion.configurator/settings.xml"
+		default_config_path="/etc/hyperion.config.json"
+		run_command="hyperiond /home/osmc/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new"
+		subprocess.call(["lsusb"])
+		subprocess.call(["killall", "-help"])
+		
+except Exception, e:
+	if xbmcgui.Dialog().yesno(addonname, "You must have killall and lsusb utilities installed on OSMC. Select Yes to have them installed. No will exit the wizard."):
+                pDialog = xbmcgui.DialogProgress()
+                pDialog.create('Installing...', 'Please wait... it can take few minutes...')
+                subprocess.call(["sudo","apt-get","install","-y","psmisc","usbutils"])
+                pDialog.close()
+        else:
+		sys.exit() 	
 
 try:
 
@@ -79,8 +98,6 @@ try:
 	grabber = ""
 	if not HyperPyCon.HyperPyCon.amIonWetek():
 		lsusb_output = subprocess.check_output('lsusb')
-
-	
 		if "1b71:3002" in lsusb_output:
 			grabber = "utv007"
 		elif "05e1:0408" in lsusb_output:
@@ -100,7 +117,7 @@ try:
 	hyperion_configuration.restart_hyperion(new_hyperion_config_path)
 
 	if not xbmcgui.Dialog().yesno(addonname, "Have you seen the rainbow swirl? (sometimes it does not appear, if you're sure that correct led type is selected, answer YES anyway, save config as default and reboot)"):
-		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... (on openelec: /storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new)")
+		xbmcgui.Dialog().ok(addonname, "Something went wrong... Please try running hyperion from command line to see the error... ("+run_command+")")
 		sys.exit()
 	else:
 		xbmcgui.Dialog().ok(addonname, "For the next 10 seconds you will see test image and leds should adjust to that image. Check if the leds are showing the right colors in the right places."+
@@ -118,7 +135,7 @@ try:
 	if xbmcgui.Dialog().yesno(addonname, "Do you want to save this config as your default one?","(if No, changes will be lost after hyperion/system restart)"):
 		hyperion_configuration.overwrite_default_config()
 	elif xbmcgui.Dialog().yesno(addonname, "Hyperion is now running with the newly created config. Would you like to restart hyperion with previous config?"):
-		hyperion_configuration.restart_hyperion(new_hyperion_config_path)
+		hyperion_configuration.restart_hyperion(default_config_path)
 
 	xbmcgui.Dialog().ok(addonname, "That\'s all Folks! :) . Enjoy!", "If you'd like to fine tune advanced parameters, please modify addon settings before running it","You may need to restart your system...")
 

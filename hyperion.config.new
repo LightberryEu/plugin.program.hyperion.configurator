@@ -12,7 +12,7 @@
             },
             "index": 0,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -23,7 +23,7 @@
             },
             "index": 1,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -34,7 +34,7 @@
             },
             "index": 2,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -45,7 +45,7 @@
             },
             "index": 3,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -56,7 +56,7 @@
             },
             "index": 4,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -67,7 +67,7 @@
             },
             "index": 5,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -78,7 +78,7 @@
             },
             "index": 6,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -89,7 +89,7 @@
             },
             "index": 7,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -100,7 +100,7 @@
             },
             "index": 8,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -111,7 +111,7 @@
             },
             "index": 9,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -122,7 +122,7 @@
             },
             "index": 10,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -133,7 +133,7 @@
             },
             "index": 11,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -144,7 +144,7 @@
             },
             "index": 12,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -155,7 +155,7 @@
             },
             "index": 13,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -166,7 +166,7 @@
             },
             "index": 14,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -177,7 +177,7 @@
             },
             "index": 15,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -188,7 +188,7 @@
             },
             "index": 16,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         },
@@ -199,8 +199,8 @@
             },
             "index": 17,
             "hscan": {
-                "minimum": 0.92310000000000003,
-                "maximum": 0.96150000000000002
+                "minimum": 0.9231,
+                "maximum": 0.9615
             }
         },
         {
@@ -210,8 +210,8 @@
             },
             "index": 18,
             "hscan": {
-                "minimum": 0.88460000000000005,
-                "maximum": 0.92310000000000003
+                "minimum": 0.8846,
+                "maximum": 0.9231
             }
         },
         {
@@ -221,8 +221,8 @@
             },
             "index": 19,
             "hscan": {
-                "minimum": 0.84619999999999995,
-                "maximum": 0.88460000000000005
+                "minimum": 0.8462,
+                "maximum": 0.8846
             }
         },
         {
@@ -232,8 +232,8 @@
             },
             "index": 20,
             "hscan": {
-                "minimum": 0.80769999999999997,
-                "maximum": 0.84619999999999995
+                "minimum": 0.8077,
+                "maximum": 0.8462
             }
         },
         {
@@ -243,8 +243,8 @@
             },
             "index": 21,
             "hscan": {
-                "minimum": 0.76919999999999999,
-                "maximum": 0.80769999999999997
+                "minimum": 0.7692,
+                "maximum": 0.8077
             }
         },
         {
@@ -254,8 +254,8 @@
             },
             "index": 22,
             "hscan": {
-                "minimum": 0.73080000000000001,
-                "maximum": 0.76919999999999999
+                "minimum": 0.7308,
+                "maximum": 0.7692
             }
         },
         {
@@ -265,8 +265,8 @@
             },
             "index": 23,
             "hscan": {
-                "minimum": 0.69230000000000003,
-                "maximum": 0.73080000000000001
+                "minimum": 0.6923,
+                "maximum": 0.7308
             }
         },
         {
@@ -276,8 +276,8 @@
             },
             "index": 24,
             "hscan": {
-                "minimum": 0.65380000000000005,
-                "maximum": 0.69230000000000003
+                "minimum": 0.6538,
+                "maximum": 0.6923
             }
         },
         {
@@ -287,8 +287,8 @@
             },
             "index": 25,
             "hscan": {
-                "minimum": 0.61539999999999995,
-                "maximum": 0.65380000000000005
+                "minimum": 0.6154,
+                "maximum": 0.6538
             }
         },
         {
@@ -298,8 +298,8 @@
             },
             "index": 26,
             "hscan": {
-                "minimum": 0.57689999999999997,
-                "maximum": 0.61539999999999995
+                "minimum": 0.5769,
+                "maximum": 0.6154
             }
         },
         {
@@ -309,8 +309,8 @@
             },
             "index": 27,
             "hscan": {
-                "minimum": 0.53849999999999998,
-                "maximum": 0.57689999999999997
+                "minimum": 0.5385,
+                "maximum": 0.5769
             }
         },
         {
@@ -321,7 +321,7 @@
             "index": 28,
             "hscan": {
                 "minimum": 0.5,
-                "maximum": 0.53849999999999998
+                "maximum": 0.5385
             }
         },
         {
@@ -331,7 +331,7 @@
             },
             "index": 29,
             "hscan": {
-                "minimum": 0.46150000000000002,
+                "minimum": 0.4615,
                 "maximum": 0.5
             }
         },
@@ -342,8 +342,8 @@
             },
             "index": 30,
             "hscan": {
-                "minimum": 0.42309999999999998,
-                "maximum": 0.46150000000000002
+                "minimum": 0.4231,
+                "maximum": 0.4615
             }
         },
         {
@@ -354,7 +354,7 @@
             "index": 31,
             "hscan": {
                 "minimum": 0.3846,
-                "maximum": 0.42309999999999998
+                "maximum": 0.4231
             }
         },
         {
@@ -364,7 +364,7 @@
             },
             "index": 32,
             "hscan": {
-                "minimum": 0.34620000000000001,
+                "minimum": 0.3462,
                 "maximum": 0.3846
             }
         },
@@ -375,8 +375,8 @@
             },
             "index": 33,
             "hscan": {
-                "minimum": 0.30769999999999997,
-                "maximum": 0.34620000000000001
+                "minimum": 0.3077,
+                "maximum": 0.3462
             }
         },
         {
@@ -386,8 +386,8 @@
             },
             "index": 34,
             "hscan": {
-                "minimum": 0.26919999999999999,
-                "maximum": 0.30769999999999997
+                "minimum": 0.2692,
+                "maximum": 0.3077
             }
         },
         {
@@ -397,8 +397,8 @@
             },
             "index": 35,
             "hscan": {
-                "minimum": 0.23080000000000001,
-                "maximum": 0.26919999999999999
+                "minimum": 0.2308,
+                "maximum": 0.2692
             }
         },
         {
@@ -409,7 +409,7 @@
             "index": 36,
             "hscan": {
                 "minimum": 0.1923,
-                "maximum": 0.23080000000000001
+                "maximum": 0.2308
             }
         },
         {
@@ -419,7 +419,7 @@
             },
             "index": 37,
             "hscan": {
-                "minimum": 0.15379999999999999,
+                "minimum": 0.1538,
                 "maximum": 0.1923
             }
         },
@@ -431,7 +431,7 @@
             "index": 38,
             "hscan": {
                 "minimum": 0.1154,
-                "maximum": 0.15379999999999999
+                "maximum": 0.1538
             }
         },
         {
@@ -441,7 +441,7 @@
             },
             "index": 39,
             "hscan": {
-                "minimum": 0.076899999999999996,
+                "minimum": 0.0769,
                 "maximum": 0.1154
             }
         },
@@ -453,7 +453,7 @@
             "index": 40,
             "hscan": {
                 "minimum": 0.0385,
-                "maximum": 0.076899999999999996
+                "maximum": 0.0769
             }
         },
         {
@@ -662,7 +662,7 @@
             "index": 59,
             "hscan": {
                 "minimum": 0.0385,
-                "maximum": 0.076899999999999996
+                "maximum": 0.0769
             }
         },
         {
@@ -672,7 +672,7 @@
             },
             "index": 60,
             "hscan": {
-                "minimum": 0.076899999999999996,
+                "minimum": 0.0769,
                 "maximum": 0.1154
             }
         },
@@ -684,7 +684,7 @@
             "index": 61,
             "hscan": {
                 "minimum": 0.1154,
-                "maximum": 0.15379999999999999
+                "maximum": 0.1538
             }
         },
         {
@@ -694,7 +694,7 @@
             },
             "index": 62,
             "hscan": {
-                "minimum": 0.15379999999999999,
+                "minimum": 0.1538,
                 "maximum": 0.1923
             }
         },
@@ -706,7 +706,7 @@
             "index": 63,
             "hscan": {
                 "minimum": 0.1923,
-                "maximum": 0.23080000000000001
+                "maximum": 0.2308
             }
         },
         {
@@ -716,8 +716,8 @@
             },
             "index": 64,
             "hscan": {
-                "minimum": 0.23080000000000001,
-                "maximum": 0.26919999999999999
+                "minimum": 0.2308,
+                "maximum": 0.2692
             }
         },
         {
@@ -727,8 +727,8 @@
             },
             "index": 65,
             "hscan": {
-                "minimum": 0.26919999999999999,
-                "maximum": 0.30769999999999997
+                "minimum": 0.2692,
+                "maximum": 0.3077
             }
         },
         {
@@ -738,8 +738,8 @@
             },
             "index": 66,
             "hscan": {
-                "minimum": 0.30769999999999997,
-                "maximum": 0.34620000000000001
+                "minimum": 0.3077,
+                "maximum": 0.3462
             }
         },
         {
@@ -749,7 +749,7 @@
             },
             "index": 67,
             "hscan": {
-                "minimum": 0.34620000000000001,
+                "minimum": 0.3462,
                 "maximum": 0.3846
             }
         },
@@ -761,7 +761,7 @@
             "index": 68,
             "hscan": {
                 "minimum": 0.3846,
-                "maximum": 0.42309999999999998
+                "maximum": 0.4231
             }
         },
         {
@@ -771,8 +771,8 @@
             },
             "index": 69,
             "hscan": {
-                "minimum": 0.42309999999999998,
-                "maximum": 0.46150000000000002
+                "minimum": 0.4231,
+                "maximum": 0.4615
             }
         },
         {
@@ -782,7 +782,7 @@
             },
             "index": 70,
             "hscan": {
-                "minimum": 0.46150000000000002,
+                "minimum": 0.4615,
                 "maximum": 0.5
             }
         },
@@ -794,7 +794,7 @@
             "index": 71,
             "hscan": {
                 "minimum": 0.5,
-                "maximum": 0.53849999999999998
+                "maximum": 0.5385
             }
         },
         {
@@ -804,8 +804,8 @@
             },
             "index": 72,
             "hscan": {
-                "minimum": 0.53849999999999998,
-                "maximum": 0.57689999999999997
+                "minimum": 0.5385,
+                "maximum": 0.5769
             }
         },
         {
@@ -815,8 +815,8 @@
             },
             "index": 73,
             "hscan": {
-                "minimum": 0.57689999999999997,
-                "maximum": 0.61539999999999995
+                "minimum": 0.5769,
+                "maximum": 0.6154
             }
         },
         {
@@ -826,8 +826,8 @@
             },
             "index": 74,
             "hscan": {
-                "minimum": 0.61539999999999995,
-                "maximum": 0.65380000000000005
+                "minimum": 0.6154,
+                "maximum": 0.6538
             }
         },
         {
@@ -837,8 +837,8 @@
             },
             "index": 75,
             "hscan": {
-                "minimum": 0.65380000000000005,
-                "maximum": 0.69230000000000003
+                "minimum": 0.6538,
+                "maximum": 0.6923
             }
         },
         {
@@ -848,8 +848,8 @@
             },
             "index": 76,
             "hscan": {
-                "minimum": 0.69230000000000003,
-                "maximum": 0.73080000000000001
+                "minimum": 0.6923,
+                "maximum": 0.7308
             }
         },
         {
@@ -859,8 +859,8 @@
             },
             "index": 77,
             "hscan": {
-                "minimum": 0.73080000000000001,
-                "maximum": 0.76919999999999999
+                "minimum": 0.7308,
+                "maximum": 0.7692
             }
         },
         {
@@ -870,8 +870,8 @@
             },
             "index": 78,
             "hscan": {
-                "minimum": 0.76919999999999999,
-                "maximum": 0.80769999999999997
+                "minimum": 0.7692,
+                "maximum": 0.8077
             }
         },
         {
@@ -881,8 +881,8 @@
             },
             "index": 79,
             "hscan": {
-                "minimum": 0.80769999999999997,
-                "maximum": 0.84619999999999995
+                "minimum": 0.8077,
+                "maximum": 0.8462
             }
         },
         {
@@ -892,8 +892,8 @@
             },
             "index": 80,
             "hscan": {
-                "minimum": 0.84619999999999995,
-                "maximum": 0.88460000000000005
+                "minimum": 0.8462,
+                "maximum": 0.8846
             }
         },
         {
@@ -903,8 +903,8 @@
             },
             "index": 81,
             "hscan": {
-                "minimum": 0.88460000000000005,
-                "maximum": 0.92310000000000003
+                "minimum": 0.8846,
+                "maximum": 0.9231
             }
         },
         {
@@ -914,8 +914,8 @@
             },
             "index": 82,
             "hscan": {
-                "minimum": 0.92310000000000003,
-                "maximum": 0.96150000000000002
+                "minimum": 0.9231,
+                "maximum": 0.9615
             }
         },
         {
@@ -925,13 +925,13 @@
             },
             "index": 83,
             "hscan": {
-                "minimum": 0.96150000000000002,
+                "minimum": 0.9615,
                 "maximum": 1.0
             }
         }
     ],
     "blackborderdetector": {
-        "threshold": 0.10000000000000001,
+        "threshold": 0.1,
         "enable": true
     },
     "endOfJson": "endOfJson",
@@ -939,10 +939,10 @@
         "transform": [
             {
                 "blue": {
-                    "threshold": 0.050000000000000003,
+                    "threshold": 0.05,
                     "blacklevel": 0.0,
                     "whitelevel": 1.0,
-                    "gamma": 2.6000000000000001
+                    "gamma": 2.6
                 },
                 "leds": "0-83",
                 "hsv": {
@@ -950,17 +950,17 @@
                     "valueGain": 1.0
                 },
                 "green": {
-                    "threshold": 0.050000000000000003,
+                    "threshold": 0.05,
                     "blacklevel": 0.0,
                     "whitelevel": 1.0,
-                    "gamma": 2.6000000000000001
+                    "gamma": 2.6
                 },
                 "id": "leds",
                 "red": {
-                    "threshold": 0.050000000000000003,
+                    "threshold": 0.05,
                     "blacklevel": 0.0,
-                    "whitelevel": 0.84999999999999998,
-                    "gamma": 2.7000000000000002
+                    "whitelevel": 0.85,
+                    "gamma": 2.7
                 }
             }
         ],
@@ -979,7 +979,7 @@
     },
     "effects": {
         "paths": [
-            "/storage/hyperion/effects"
+            "/opt/hyperion/effects"
         ]
     },
     "device": {
@@ -1001,23 +1001,5 @@
     },
     "jsonServer": {
         "port": 19444
-    },
-    "grabber-v4l2": {
-        "cropLeft": 5,
-        "cropTop": 5,
-        "cropRight": 5,
-        "width": 720,
-        "blueSignalThreshold": 0.20000000000000001,
-        "redSignalThreshold": 0.20000000000000001,
-        "height": 576,
-        "priority": 1200,
-        "frameDecimation": 2,
-        "sizeDecimation": 8,
-        "mode": "2D",
-        "device": "/dev/video0",
-        "input": 0,
-        "standard": "PAL",
-        "cropBottom": 5,
-        "greenSignalThreshold": 0.20000000000000001
     }
 }

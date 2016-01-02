@@ -29,7 +29,10 @@ class HyperPyCon:
 		self.smoothing = HyperionConfigSections.Smoothing("linear",100,20)
 		self.device = HyperionConfigSections.Device()
 		self.blackborderdetector = HyperionConfigSections.blackborderdetectord
-		self.effects = HyperionConfigSections.effectsd
+		if HyperPyCon.amIonOSMC():
+			self.effects = dict(paths = ["/opt/hyperion/effects"])
+		else:
+			self.effects = HyperionConfigSections.effectsd
 		self.bootsequence = HyperionConfigSections.bootsequenced
 		if HyperPyCon.amIonWetek():
 			self.amlgrabber = HyperionConfigSections.amlgrabberd
@@ -48,6 +51,14 @@ class HyperPyCon:
 			return True
 		else:
 			return False
+        @staticmethod
+        def amIonOSMC():
+                if "osmc" in open("/proc/version").read():
+                        return True
+                else:
+                        return False
+
+
 
 	def set_device_type(self,device_type):
 		if device_type == HyperPyCon.adalight:
@@ -120,8 +131,12 @@ class HyperPyCon:
 		else:
 			config_folder = "/etc/"
 
-		shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")
-		shutil.copyfile(self.new_hyperion_config_path,config_folder+"hyperion.config.json")
+		if HyperPyCon.amIonOSMC():
+			subprocess.call(["sudo","cp",config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak"])
+			subprocess.call(["sudo","cp",self.new_hyperion_config_path,config_folder+"hyperion.config.json"])
+		else:
+			shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")
+			shutil.copyfile(self.new_hyperion_config_path,config_folder+"hyperion.config.json")
 
 	def config_grabber(self,grabber_model):
 		self.grabber_enabled = True
