@@ -75,6 +75,9 @@ class HyperPyCon:
 	def set_device_rate(self, rate):
 		self.device.rate = rate			
 		
+	def set_device_color_order(self, colorOrder):
+		self.device.color_order = colorOrder	
+		
 	def set_color_values(self,threshold, gamma, blacklevel,whitelevel, color_name):
 		self.transform.set_color_transformation(HyperionConfigSections.SingleColor(threshold,gamma,blacklevel,whitelevel), color_name)
 		
