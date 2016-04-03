@@ -17,12 +17,22 @@ settings_cache_path = "/storage/.kodi/userdata/addon_data/plugin.program.hyperio
 default_config_path="/storage/.config/hyperion.config.json"
 run_command="/storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new"
 import HyperPyCon 
+import AddonGithubUpdater
 
 line1 = "Welcome!"
 line2 = "We are about to prepare your hyperion config file in this step-by-step wizard."
 line3 = "You must complete all steps to have the config file generated. Let\'s start!"
-
 xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
+
+try:
+    updater=AddonGithubUpdater.AddonGithubUpdater("/storage/.kodi/addons","plugin.program.hyperion.configurator-master","LightberryEu","plugin.program.hyperion.configurator")
+    if updater.isUpdateAvailable():
+        if xbmcgui.Dialog().yesno(addonname, "Plugin update is available. Do you want to install new version?"):
+            updater.installUpdate()
+            xbmcgui.Dialog().ok(addonname, "Update installed. Please restart plugin")
+            sys.exit()
+except Exception, e:
+    xbmcgui.Dialog().ok(addonname, "Failed to check the update...")
 
 #check if hyperion is installed, if not, install the newest version
 if not HyperPyCon.HyperPyCon.isHyperionInstalled():
