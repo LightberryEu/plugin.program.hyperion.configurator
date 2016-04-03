@@ -3,4 +3,4 @@
 1.1.0 Addon settings added to provide more setup options; APA102 added
 1.2.0 OSMC support added
 1.2.2 Added color order setting
-1.3.0 Plugin is now checking if hyperion is installed. If not, runs install commands (for OE only). Grabber priority changed to 900 - as per recent changes in hyperion code.
+1.3.0 Plugin is now checking if hyperion is installed. If not, runs install commands (for OE only). Grabber priority changed to 900 - as per recent changes in hyperion code
