@@ -25,14 +25,14 @@ line3 = "You must complete all steps to have the config file generated. Let\'s s
 xbmcgui.Dialog().ok(addonname, line1, line2 + line3)
 
 try:
-    updater=AddonGithubUpdater.AddonGithubUpdater("/storage/.kodi/addons","plugin.program.hyperion.configurator-master","LightberryEu","plugin.program.hyperion.configurator")
+    updater=AddonGithubUpdater.AddonGithubUpdater(addon_dir,"LightberryEu","plugin.program.hyperion.configurator")
     if updater.isUpdateAvailable():
         if xbmcgui.Dialog().yesno(addonname, "Plugin update is available. Do you want to install new version?"):
             updater.installUpdate()
             xbmcgui.Dialog().ok(addonname, "Update installed. Please restart plugin")
             sys.exit()
 except Exception, e:
-    xbmcgui.Dialog().ok(addonname, "Failed to check the update...")
+    xbmcgui.Dialog().ok(addonname, repr(e),"Failed to check the update...")
 
 #check if hyperion is installed, if not, install the newest version
 if not HyperPyCon.HyperPyCon.isHyperionInstalled():
