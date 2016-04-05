@@ -36,8 +36,8 @@ except Exception, e:
 
 #check if hyperion is installed, if not, install the newest version
 if not HyperPyCon.HyperPyCon.isHyperionInstalled():
-    if HyperPyCon.amIonOSMC():
-        xbmcgui.Dialog().ok(addonname, "Hyperion installation was not detected. Please install OSMC manually...")
+    if HyperPyCon.HyperPyCon.amIonOSMC():
+        xbmcgui.Dialog().ok(addonname, "Hyperion installation was not detected. Please install manually...")
         sys.exit()
     xbmcgui.Dialog().ok(addonname, "Hyperion installation was not detected. We will install it now...")
     rc=HyperPyCon.HyperPyCon.install_hyperion()
