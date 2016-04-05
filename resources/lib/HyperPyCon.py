@@ -61,7 +61,7 @@ class HyperPyCon:
 						
     @staticmethod
     def isHyperionInstalled():
-        if os.path.isdir("/storage/hyperion/bin"):
+        if os.path.isdir("/storage/hyperion/bin") or os.path.isdir("/opt/hyperion"):
             return True
         else:
             return False

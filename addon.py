@@ -36,6 +36,9 @@ except Exception, e:
 
 #check if hyperion is installed, if not, install the newest version
 if not HyperPyCon.HyperPyCon.isHyperionInstalled():
+    if HyperPyCon.amIonOSMC():
+        xbmcgui.Dialog().ok(addonname, "Hyperion installation was not detected. Please install OSMC manually...")
+        sys.exit()
     xbmcgui.Dialog().ok(addonname, "Hyperion installation was not detected. We will install it now...")
     rc=HyperPyCon.HyperPyCon.install_hyperion()
     if rc==-2 :
@@ -71,6 +74,8 @@ try:
     else:
         device_versions = [ HyperPyCon.HyperPyCon.adalightapa102 , HyperPyCon.HyperPyCon.adalight,  HyperPyCon.HyperPyCon.ws2801, HyperPyCon.HyperPyCon.apa102]
     selected_device = xbmcgui.Dialog().select("Select your led device:",device_versions)
+    if selected_device == -1:
+        sys.exit();
     if selected_device == 2 or selected_device == 3:    
         if "spidev" not in subprocess.check_output(['ls','/dev']):
             xbmcgui.Dialog().ok(addonname, "We have detected that your system does not have spi enabled. You can still continue, but leds may not work if you're using GPIO/SPI connection")

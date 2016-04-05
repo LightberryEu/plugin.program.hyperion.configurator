@@ -6,3 +6,4 @@
 1.3.0 Plugin is now checking if hyperion is installed. If not, runs install commands (for OE only). Grabber priority changed to 900 - as per recent changes in hyperion code.
 1.4.0 Auto updater added..
 1.4.1 Fix for OSMC
+1.4.2 Removing hyperion installation for OSMC
