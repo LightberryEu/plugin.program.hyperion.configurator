@@ -51,21 +51,21 @@ class HyperPyCon:
             return True
         else:
             return False
-			
+            
     @staticmethod
     def amIonOSMC():
                 if "osmc" in open("/proc/version").read():
                         return True
                 else:
                         return False
-						
+                        
     @staticmethod
     def isHyperionInstalled():
         if os.path.isdir("/storage/hyperion/bin") or os.path.isdir("/opt/hyperion"):
             return True
         else:
             return False
-			
+            
     @staticmethod
     def install_hyperion():
         if HyperPyCon.amIonOSMC():
@@ -192,6 +192,12 @@ class HyperPyCon:
         
     def set_grabber_video_standard(self,standard):
         self.grabber.standard = standard;
+        
+    def set_grabber_signal_off(self,color_when_off):
+        if(color_when_off == "BLUE"):
+            self.grabber.red_signal_threshold = 0.1
+            self.grabber.green_signal_threshold = 0.1
+            self.grabber.blue_signal_threshold = 1.0    
 
     def clear_leds(self):
         self.tester.clear_leds()        

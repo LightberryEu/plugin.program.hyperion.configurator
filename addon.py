@@ -90,7 +90,7 @@ try:
 
     nol_horizontal = xbmcgui.Dialog().input("Select number of leds horizontally","29",xbmcgui.INPUT_NUMERIC)
     nol_vertical = xbmcgui.Dialog().input("Select number of leds vertically","16",xbmcgui.INPUT_NUMERIC)
-    if xbmcgui.Dialog().yesno(addonname, "Would you like to download recommended settings for the Lightberry you selected?"):
+    if xbmcgui.Dialog().yesno(addonname, "Would you like to download recommended settings for the Lightberry you selected? WARNING: that will overwrite your current addon settings!"):
         try:
             settingsxml = urllib2.urlopen("http://img.lightberry.eu/download/settings.xml-"+suffix).read()
             f = open(addon_dir+"/resources/settings.xml","w")
@@ -112,7 +112,8 @@ try:
     hyperion_configuration.set_smoothing(addon.getSetting("smoothingType"),int(addon.getSetting("smoothingTime")),int(addon.getSetting("smoothingFreq")))
     hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
     hyperion_configuration.set_grabber_video_standard(addon.getSetting("videoStandard"))
-
+    hyperion_configuration.set_grabber_signal_off(addon.getSetting("colorWhenSourceIsOff"))
+	
     options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
     selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)
 
