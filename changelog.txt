@@ -8,3 +8,4 @@
 1.4.1 Fix for OSMC
 1.4.2 Removing hyperion installation for OSMC
 1.5.0 Color of video when grabber signal is off is now available in addon settings
+1.5.1 Color order setting fixed
