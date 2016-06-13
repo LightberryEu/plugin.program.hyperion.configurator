@@ -104,7 +104,7 @@ try:
     hyperion_configuration.set_device_type(device_versions[selected_device])
     hyperion_configuration.set_device_rate(int(addon.getSetting("rate")))
     if(addon.getSetting("colorOrder") != "Default"):
-        hyperion_configuration.set_device_color_order(addon.getSetting("colorOrder"))
+        hyperion_configuration.set_device_color_order(addon.getSetting("colorOrder").lower())
         
     hyperion_configuration.set_color_values(float(addon.getSetting("redThreshold")), float(addon.getSetting("redGamma")),float(addon.getSetting("redBlacklevel")),float(addon.getSetting("redWhitelevel")),"RED")
     hyperion_configuration.set_color_values(float(addon.getSetting("greenThreshold")), float(addon.getSetting("greenGamma")),float(addon.getSetting("greenBlacklevel")),float(addon.getSetting("greenWhitelevel")),"GREEN")
