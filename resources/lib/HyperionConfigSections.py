@@ -144,7 +144,7 @@ class GrabberV4l2:
 		self.height = 576
 		self.frame_decimation = 2
 		self.size_decimation = 8
-		self.priority = 600
+		self.priority = 910
 		self.mode = "2D"
 		self.crop_left = 5
 		self.crop_right = 5
