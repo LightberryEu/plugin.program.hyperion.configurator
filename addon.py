@@ -16,6 +16,8 @@ hyperion_installation_path="/storage/hyperion/bin"
 settings_cache_path = "/storage/.kodi/userdata/addon_data/plugin.program.hyperion.configurator/settings.xml"
 default_config_path="/storage/.config/hyperion.config.json"
 run_command="/storage/hyperion/bin/hyperiond.sh /storage/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new"
+gpio_version=False
+
 import HyperPyCon 
 import AddonGithubUpdater
 
@@ -79,6 +81,7 @@ try:
     if selected_device == 2 or selected_device == 3:    
         if "spidev" not in subprocess.check_output(['ls','/dev']):
             xbmcgui.Dialog().ok(addonname, "We have detected that your system does not have spi enabled. You can still continue, but leds may not work if you're using GPIO/SPI connection")
+        gpio_version=True
 
     if selected_device == 0 or selected_device == 3:
         suffix = "apa102"
@@ -113,6 +116,9 @@ try:
     hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
     hyperion_configuration.set_grabber_video_standard(addon.getSetting("videoStandard"))
     hyperion_configuration.set_grabber_signal_off(addon.getSetting("colorWhenSourceIsOff"))
+    if gpio_version:   
+       #turn off unused leds if this is GPIO version of Lightberry
+       hyperion_configuration.disable_extra_leds(150-hyperion_configuration.total_number_of_leds)
 	
     options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
     selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)

@@ -14,6 +14,7 @@ class HyperPyCon:
     apa102 = "Lightberry HD for Raspberry Pi (apa102)"
     adalight = "Lightberry HD USB (ws2801)" 
     adalightapa102 = "Lightberry HD USB (apa102)"
+    qty_of_disabled_leds=0
 
     def __init__(self, nol_horizontal, nol_vertical):
         self.grabber_enabled = False
@@ -104,6 +105,8 @@ class HyperPyCon:
 
     def create_config(self):
         self.color.add_transformation(self.transform)
+        if self.qty_of_disabled_leds != 0:
+			self.color.add_transformation(self.ledsoff_transform)
         self.color.set_smoothing(self.smoothing)
         if HyperPyCon.amIonWetek():
             hyperion_config_dict = OrderedDict(
@@ -201,6 +204,15 @@ class HyperPyCon:
 
     def clear_leds(self):
         self.tester.clear_leds()        
+        
+    def disable_extra_leds(self, qty_of_disabled_leds):
+        self.qty_of_disabled_leds=qty_of_disabled_leds
+        self.ledsoff_transform = HyperionConfigSections.Transform("ledsOff",str(self.total_number_of_leds)+"-"+str(self.total_number_of_leds+self.qty_of_disabled_leds-1),
+            HyperionConfigSections.HSV(0,0),
+            HyperionConfigSections.SingleColor(0.05,2.2,0,0),
+            HyperionConfigSections.SingleColor(0.05,2.0,0,0),
+            HyperionConfigSections.SingleColor(0.05,2.0,0,0))
+        self.led_chain.add_extra_leds(qty_of_disabled_leds)
 
 
 #h = HyperPyCon(23,23)

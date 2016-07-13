@@ -10,3 +10,4 @@
 1.5.0 Color of video when grabber signal is off is now available in addon settings
 1.5.1 Color order setting fixed
 1.5.2 Fixing hyperion v4l2 priority (again) to 910
+1.6.0 Turn off leds (up to 150th) if GPIO lightberry is in use

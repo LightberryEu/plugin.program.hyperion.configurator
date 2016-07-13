@@ -146,6 +146,11 @@ class LedChain:
 		else:
 			for i in range(len(self.leds)):
 				self.leds[i].set_color(red, green, blue)		
+	def add_extra_leds(self, no_of_extra_leds):
+		for i in range(0,no_of_extra_leds):
+			led=Led()
+			led.position=self.number_of_leds+i
+			self.leds.append(led)
 			
 #test
 #t = LedChain(50)
