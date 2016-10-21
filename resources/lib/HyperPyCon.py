@@ -12,7 +12,7 @@ import shutil
 class HyperPyCon:
     ws2801 = "Lightberry HD for Raspberry Pi (ws2801)"
     apa102 = "Lightberry HD for Raspberry Pi (apa102)"
-    adalight = "Lightberry HD USB (ws2801)" 
+    adalight = "Lightberry HD USB (ws2801)"
     adalightapa102 = "Lightberry HD USB (apa102)"
     qty_of_disabled_leds=0
 
@@ -43,7 +43,7 @@ class HyperPyCon:
         self.xbmcVideoChecker = HyperionConfigSections.XBMCVideoChecker()
         self.jsonServer = HyperionConfigSections.json_serverd
         self.protoServer = HyperionConfigSections.proto_serverd
-        
+
         self.tester = HyperionConfigTester.HyperionConfigTester(self.led_chain)
 
     @staticmethod
@@ -52,21 +52,21 @@ class HyperPyCon:
             return True
         else:
             return False
-            
+
     @staticmethod
     def amIonOSMC():
                 if "osmc" in open("/proc/version").read():
                         return True
                 else:
                         return False
-                        
+
     @staticmethod
     def isHyperionInstalled():
-        if os.path.isdir("/storage/hyperion/bin") or os.path.isdir("/opt/hyperion"):
+        if os.path.isdir("/storage/hyperion/bin") or os.path.isdir("/opt/hyperion") or os.path.isdir("/usr/share/hyperion"):
             return True
         else:
             return False
-            
+
     @staticmethod
     def install_hyperion():
         if HyperPyCon.amIonOSMC():
@@ -75,7 +75,7 @@ class HyperPyCon:
         if rc!=0:
             return -2
         return subprocess.call(["sh", "/storage/install_hyperion.sh"])
-            
+
     def set_device_type(self,device_type):
         if device_type == HyperPyCon.adalight:
             self.device.type = "adalight"
@@ -87,19 +87,19 @@ class HyperPyCon:
             self.device.type = "adalightapa102"
             self.device.output = "/dev/ttyACM0"
             self.device.color_order = "bgr"
-            
+
     def set_device_rate(self, rate):
-        self.device.rate = rate         
-        
+        self.device.rate = rate
+
     def set_device_color_order(self, colorOrder):
-        self.device.color_order = colorOrder    
-        
+        self.device.color_order = colorOrder
+
     def set_color_values(self,threshold, gamma, blacklevel,whitelevel, color_name):
         self.transform.set_color_transformation(HyperionConfigSections.SingleColor(threshold,gamma,blacklevel,whitelevel), color_name)
-        
+
     def set_smoothing(self, type, time_ms, update_frequency):
         self.smoothing = HyperionConfigSections.Smoothing(type,time_ms,update_frequency)
-        
+
     def set_blackborderdetection(self,enabled,bbdthreshold):
         self.blackborderdetector = dict(enable = enabled, threshold = bbdthreshold)
 
@@ -110,29 +110,29 @@ class HyperPyCon:
         self.color.set_smoothing(self.smoothing)
         if HyperPyCon.amIonWetek():
             hyperion_config_dict = OrderedDict(
-                device = self.device.to_dict(), 
-                color = self.color.to_dict(), 
+                device = self.device.to_dict(),
+                color = self.color.to_dict(),
                 leds = self.led_chain.get_list_of_leds_dicts(),
-                blackborderdetector = self.blackborderdetector, 
-                effects = self.effects, 
+                blackborderdetector = self.blackborderdetector,
+                effects = self.effects,
                 bootsequence = self.bootsequence,
-                amlgrabber = self.amlgrabber, 
-                xbmcVideoChecker = self.xbmcVideoChecker.to_dict(), 
-                jsonServer = self.jsonServer, 
-                protoServer = self.protoServer, 
+                amlgrabber = self.amlgrabber,
+                xbmcVideoChecker = self.xbmcVideoChecker.to_dict(),
+                jsonServer = self.jsonServer,
+                protoServer = self.protoServer,
                 endOfJson = 'endOfJson')
-        else:       
+        else:
             hyperion_config_dict = OrderedDict(
-                device = self.device.to_dict(), 
-                color = self.color.to_dict(), 
+                device = self.device.to_dict(),
+                color = self.color.to_dict(),
                 leds = self.led_chain.get_list_of_leds_dicts(),
-                blackborderdetector = self.blackborderdetector, 
-                effects = self.effects, 
+                blackborderdetector = self.blackborderdetector,
+                effects = self.effects,
                 bootsequence = self.bootsequence,
-                framegrabber = self.framegrabber, 
-                xbmcVideoChecker = self.xbmcVideoChecker.to_dict(), 
-                jsonServer = self.jsonServer, 
-                protoServer = self.protoServer, 
+                framegrabber = self.framegrabber,
+                xbmcVideoChecker = self.xbmcVideoChecker.to_dict(),
+                jsonServer = self.jsonServer,
+                protoServer = self.protoServer,
                 endOfJson = 'endOfJson')
 
         if self.grabber_enabled:
@@ -177,7 +177,7 @@ class HyperPyCon:
             else:
                 self.grabber.height = 480
             self.grabber.frame_decimation = 2
-            self.grabber.size_decimation = 8    
+            self.grabber.size_decimation = 8
 
     def restart_hyperion(self,hyperion_config_path):
         self.new_hyperion_config_path = hyperion_config_path
@@ -192,19 +192,19 @@ class HyperPyCon:
 
     def show_test_image(self, image_path):
         self.tester.show_test_image(image_path)
-        
+
     def set_grabber_video_standard(self,standard):
         self.grabber.standard = standard;
-        
+
     def set_grabber_signal_off(self,color_when_off):
         if(color_when_off == "BLUE"):
             self.grabber.red_signal_threshold = 0.1
             self.grabber.green_signal_threshold = 0.1
-            self.grabber.blue_signal_threshold = 1.0    
+            self.grabber.blue_signal_threshold = 1.0
 
     def clear_leds(self):
-        self.tester.clear_leds()        
-        
+        self.tester.clear_leds()
+
     def disable_extra_leds(self, qty_of_disabled_leds):
         self.qty_of_disabled_leds=qty_of_disabled_leds
         self.ledsoff_transform = HyperionConfigSections.Transform("ledsOff",str(self.total_number_of_leds)+"-"+str(self.total_number_of_leds+self.qty_of_disabled_leds-1),
@@ -216,7 +216,7 @@ class HyperPyCon:
 
 
 #h = HyperPyCon(23,23)
-#h.restart_hyperion()   
+#h.restart_hyperion()
 #print "Config ready"
 #print "Testing leds..."
 #test = HyperionConfigTester.HyperionConfigTester(led_chain, "OPENELEC")
