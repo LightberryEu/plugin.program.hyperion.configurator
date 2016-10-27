@@ -34,7 +34,7 @@ try:
             xbmcgui.Dialog().ok(addonname, "Update installed. Please restart plugin")
             sys.exit()
 except Exception, e:
-    xbmcgui.Dialog().ok(addonname, repr(e),"Failed to check the update...")
+    xbmcgui.Dialog().ok(addonname, "Failed to check the update. Maybe your Pi is not connected to the Internet")
 
 #check if hyperion is installed, if not, install the newest version
 if not HyperPyCon.HyperPyCon.isHyperionInstalled():
@@ -102,8 +102,8 @@ try:
             if os.path.isfile(settings_cache_path):
                 os.remove(settings_cache_path)
         except Exception, e:
-            xbmcgui.Dialog().ok(addonname, repr(e),"Couldnt download the settings - I will use default.")           
-    hyperion_configuration = HyperPyCon.HyperPyCon(int(nol_horizontal), int(nol_vertical))
+            xbmcgui.Dialog().ok(addonname, repr(e),"Couldnt download the settings - Setup will use default.")           
+    hyperion_configuration = HyperPyCon.HyperPyCon(int(nol_horizontal), int(nol_vertical), 0.08, 0.1) #parameter from plugin settings to be added
     hyperion_configuration.set_device_type(device_versions[selected_device])
     hyperion_configuration.set_device_rate(int(addon.getSetting("rate")))
     if(addon.getSetting("colorOrder") != "Default"):

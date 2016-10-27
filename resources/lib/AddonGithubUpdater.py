@@ -18,7 +18,11 @@ class AddonGithubUpdater:
 		f=open(self.addonFullPath+"/changelog.txt")
 		local=f.readlines()[-1]
 		f.close()
-		remote=urllib2.urlopen("https://raw.githubusercontent.com/LightberryEu/plugin.program.hyperion.configurator/master/changelog.txt").readlines()[-1]
+		try:
+			remote=urllib2.urlopen("https://raw.githubusercontent.com/LightberryEu/plugin.program.hyperion.configurator/master/changelog.txt").readlines()[-1]
+		except Exception, e:
+			pDialog.close()
+			return false
 		pDialog.close()
 		#xbmcgui.Dialog().ok("test", local, remote)
 		return local!=remote

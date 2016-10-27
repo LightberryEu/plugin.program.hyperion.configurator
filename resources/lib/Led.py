@@ -43,7 +43,7 @@ class LedChain:
 		self.leds = []
 		self.offset = 0
 		
-	def generate_layout(self, nol_horizontal, nol_vertical):
+	def generate_layout(self, nol_horizontal, nol_vertical, horizontal_depth, vertical_depth):
 		"""key method in this class - it calculates coordinates of picture scan area. As a result
 			there are Led instances created with coordinates assigned"""
 		self.nol_horizontal = nol_horizontal
@@ -59,22 +59,28 @@ class LedChain:
 			if i < nol_vertical: # right
 				vertical_position = i+1
 				area_top_coordinate = (1 -(self.vertical_segment * vertical_position))
-				area_left_coordinate = 1 - self.horizontal_segment;
+				area_left_coordinate = 1 - horizontal_depth;
+				area_right_coordinate = 1
+				area_bottom_coordinate = area_top_coordinate + self.vertical_segment
 			elif i >= nol_vertical and i < nol_vertical + nol_horizontal : #top
 				horizontal_position = nol_horizontal - (i - nol_vertical) - 1
 				area_left_coordinate = horizontal_position * self.horizontal_segment
 				area_top_coordinate = 0.0
+				area_bottom_coordinate = vertical_depth
+				area_right_coordinate = area_left_coordinate + self.horizontal_segment
 			elif i >= nol_vertical + nol_horizontal and i < nol_vertical + nol_horizontal + nol_vertical: #left
 				vertical_position = i - nol_vertical - nol_horizontal
 				area_top_coordinate = (0 +(self.vertical_segment * vertical_position))
 				area_left_coordinate = 0.0
+				area_right_coordinate = horizontal_depth
+				area_bottom_coordinate = area_top_coordinate + self.vertical_segment
 			else: # bottom 
-				area_top_coordinate = (1 - self.vertical_segment)
 				horizontal_position = i - nol_vertical - nol_horizontal - nol_vertical
+				area_top_coordinate = (1 - vertical_depth)
 				area_left_coordinate = horizontal_position * self.horizontal_segment
+				area_right_coordinate = area_left_coordinate + self.horizontal_segment
+				area_bottom_coordinate = 1
 		
-			area_bottom_coordinate = area_top_coordinate + self.vertical_segment
-			area_right_coordinate = area_left_coordinate + self.horizontal_segment
 			led = Led()
 			led.setCoordinates(area_left_coordinate,area_right_coordinate, area_top_coordinate,area_bottom_coordinate)
 			led.position = i

@@ -16,11 +16,11 @@ class HyperPyCon:
     adalightapa102 = "Lightberry HD USB (apa102)"
     qty_of_disabled_leds=0
 
-    def __init__(self, nol_horizontal, nol_vertical):
+    def __init__(self, nol_horizontal, nol_vertical,horizontal_depth, vertical_depth):
         self.grabber_enabled = False
         self.total_number_of_leds = ((nol_horizontal + nol_vertical) * 2)
         self.led_chain = LedChain(self.total_number_of_leds)
-        self.led_chain.generate_layout(nol_horizontal, nol_vertical)
+        self.led_chain.generate_layout(nol_horizontal, nol_vertical,horizontal_depth, vertical_depth)
         self.transform = HyperionConfigSections.Transform("leds","0-"+str(self.total_number_of_leds-1),
             HyperionConfigSections.HSV(1.0,1.0),
             HyperionConfigSections.SingleColor(0.05,2.2,0,1),
