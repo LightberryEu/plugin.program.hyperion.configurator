@@ -146,10 +146,10 @@ class GrabberV4l2:
 		self.size_decimation = 8
 		self.priority = 910
 		self.mode = "2D"
-		self.crop_left = 5
-		self.crop_right = 5
-		self.crop_top = 5
-		self.crop_bottom = 5
+		self.crop_left = 46
+		self.crop_right = 42
+		self.crop_top = 20
+		self.crop_bottom = 37
 		self.red_signal_threshold = 0.2
 		self.green_signal_threshold = 0.2
 		self.blue_signal_threshold = 0.2
