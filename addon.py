@@ -72,9 +72,9 @@ except Exception, e:
 try:
 
     if HyperPyCon.HyperPyCon.amIonWetek() :
-        device_versions = [ HyperPyCon.HyperPyCon.adalightapa102 , HyperPyCon.HyperPyCon.adalight ]
+        device_versions = [ HyperPyCon.HyperPyCon.adalightapa102 , HyperPyCon.HyperPyCon.adalight , HyperPyCon.HyperPyCon.lightberryXL ]
     else:
-        device_versions = [ HyperPyCon.HyperPyCon.adalightapa102 , HyperPyCon.HyperPyCon.adalight,  HyperPyCon.HyperPyCon.ws2801, HyperPyCon.HyperPyCon.apa102]
+        device_versions = [ HyperPyCon.HyperPyCon.adalightapa102 , HyperPyCon.HyperPyCon.adalight,  HyperPyCon.HyperPyCon.ws2801, HyperPyCon.HyperPyCon.apa102, HyperPyCon.HyperPyCon.lightberryXL]
     selected_device = xbmcgui.Dialog().select("Select your led device:",device_versions)
     if selected_device == -1:
         sys.exit();
@@ -85,6 +85,8 @@ try:
 
     if selected_device == 0 or selected_device == 3:
         suffix = "apa102"
+    elif selected_device ==4:
+        suffix = "xl"
     else:
         suffix = "ws2801"
         
@@ -116,7 +118,7 @@ try:
     hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
     hyperion_configuration.set_grabber_video_standard(addon.getSetting("videoStandard"))
     hyperion_configuration.set_grabber_signal_off(addon.getSetting("colorWhenSourceIsOff"))
-    if gpio_version:   
+    if gpio_version or device_versions[selected_device] == HyperPyCon.HyperPyCon.lightberryXL:   
        #turn off unused leds if this is GPIO version of Lightberry
        hyperion_configuration.disable_extra_leds(150-hyperion_configuration.total_number_of_leds)
 	

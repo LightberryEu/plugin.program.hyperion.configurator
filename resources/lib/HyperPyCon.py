@@ -14,6 +14,7 @@ class HyperPyCon:
     apa102 = "Lightberry HD for Raspberry Pi (apa102)"
     adalight = "Lightberry HD USB (ws2801)"
     adalightapa102 = "Lightberry HD USB (apa102)"
+    lightberryXL = "Lightberry XL"
     qty_of_disabled_leds=0
 
     def __init__(self, nol_horizontal, nol_vertical,horizontal_depth, vertical_depth):
@@ -77,7 +78,7 @@ class HyperPyCon:
         return subprocess.call(["sh", "/storage/install_hyperion.sh"])
 
     def set_device_type(self,device_type):
-        if device_type == HyperPyCon.adalight:
+        if device_type == HyperPyCon.adalight or device_type == HyperPyCon.lightberryXL:
             self.device.type = "adalight"
             self.device.output = "/dev/ttyACM0"
         elif device_type == HyperPyCon.apa102:
@@ -106,7 +107,7 @@ class HyperPyCon:
     def create_config(self):
         self.color.add_transformation(self.transform)
         if self.qty_of_disabled_leds != 0:
-			self.color.add_transformation(self.ledsoff_transform)
+            self.color.add_transformation(self.ledsoff_transform)
         self.color.set_smoothing(self.smoothing)
         if HyperPyCon.amIonWetek():
             hyperion_config_dict = OrderedDict(

@@ -3,7 +3,7 @@
     <category label="32010">
 	<setting label="Device" type="lsep"/>
 	<setting label="Rate" type="number" id="rate" default="500000"/>
-	<setting label="Color order" type="select" values="Default|RGB|GRB|RBG|BGR|GBR" id="colorOrder" default="Default"/>
+	<setting label="Color order" type="select" values="Default|RGB|GRB|RBG|BGR|GBR|BRG" id="colorOrder" default="Default"/>
 	
 	<setting label="Smoothing" type="lsep"/>
 	<setting label="Type" type="select" id="smoothingType" values="linear|none" default="linear"/>
