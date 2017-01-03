@@ -13,4 +13,5 @@
 1.6.0 Turn off leds (up to 150th) if GPIO lightberry is in use
 1.7.0 Small bugfixes and fixed depth of scan area (now it is static 8% and 10%)
 1.7.1 V4l2 crop default values adjusted for HDMI 4.0 kit
+1.7.2 Added BRG color order
 1.8.0 Lighberry XL added to led device type
