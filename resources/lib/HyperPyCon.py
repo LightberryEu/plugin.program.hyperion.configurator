@@ -157,7 +157,11 @@ class HyperPyCon:
             subprocess.call(["sudo","cp",config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak"])
             subprocess.call(["sudo","cp",self.new_hyperion_config_path,config_folder+"hyperion.config.json"])
         else:
-            shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")
+            try:
+                shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")
+            except:
+                """ Ignore IO exception that might occur when there is no hyperion.config.json to backup """
+                pass
             shutil.copyfile(self.new_hyperion_config_path,config_folder+"hyperion.config.json")
 
     def config_grabber(self,grabber_model):
