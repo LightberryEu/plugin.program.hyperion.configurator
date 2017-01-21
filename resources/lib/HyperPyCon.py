@@ -78,9 +78,13 @@ class HyperPyCon:
         return subprocess.call(["sh", "/storage/install_hyperion.sh"])
 
     def set_device_type(self,device_type):
-        if device_type == HyperPyCon.adalight or device_type == HyperPyCon.lightberryXL:
+        if device_type == HyperPyCon.adalight:
             self.device.type = "adalight"
             self.device.output = "/dev/ttyACM0"
+        elif device_type == HyperPyCon.lightberryXL:
+            self.device.type = "adalight"
+            self.device.output = "/dev/ttyACM0"
+            self.device.color_order = "brg"
         elif device_type == HyperPyCon.apa102:
             self.device.type = "apa102"
             self.device.color_order = "bgr"
