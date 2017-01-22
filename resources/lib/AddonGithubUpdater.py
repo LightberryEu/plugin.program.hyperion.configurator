@@ -19,7 +19,7 @@ class AddonGithubUpdater:
 		local=f.readlines()[-1]
 		f.close()
 		try:
-			remote=urllib2.urlopen("https://raw.githubusercontent.com/LightberryEu/plugin.program.hyperion.configurator/master/changelog.txt").readlines()[-1]
+			remote=urllib2.urlopen("https://raw.githubusercontent.com/"+self.githubOrg+"/"+self.githubRepo+"/master/changelog.txt").readlines()[-1]
 		except Exception, e:
 			pDialog.close()
 			return false
