@@ -17,3 +17,4 @@
 1.8.0 Lighberry XL added to led device type
 1.8.1 Bugfix of IOError when hyperion.config.json is not present
 1.8.1 Lighberry XL color order fix
+1.8.2 Bugfix filling unused leds and hardcoded repo address
