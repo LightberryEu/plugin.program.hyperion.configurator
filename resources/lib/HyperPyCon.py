@@ -32,7 +32,7 @@ class HyperPyCon:
         self.device = HyperionConfigSections.Device()
         self.blackborderdetector = HyperionConfigSections.blackborderdetectord
         if HyperPyCon.amIonOSMC():
-            self.effects = dict(paths = ["/opt/hyperion/effects"])
+            self.effects = dict(paths = ["/usr/share/hyperion/effects"])
         else:
             self.effects = HyperionConfigSections.effectsd
         self.bootsequence = HyperionConfigSections.bootsequenced
@@ -154,12 +154,20 @@ class HyperPyCon:
     def overwrite_default_config(self):
         if os.path.isdir("/storage/.config"):
             config_folder = "/storage/.config/"
-        else:
+
+        # check if new versio of hyperion is installed
+        elif os.path.exists("/opt/hyperion/bin/hyperiond"):
             config_folder = "/etc/"
+        else:
+            config_folder = "/etc/hyperion/"
 
         if HyperPyCon.amIonOSMC():
-            subprocess.call(["sudo","cp",config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak"])
-            subprocess.call(["sudo","cp",self.new_hyperion_config_path,config_folder+"hyperion.config.json"])
+            try:
+                subprocess.call(["sudo","cp",config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak"])
+                subprocess.call(["sudo","cp",self.new_hyperion_config_path,config_folder+"hyperion.config.json"])
+            except:
+                """ Ignore IO exception that might occur when there is no hyperion.config.json to backup """
+                pass
         else:
             try:
                 shutil.copyfile(config_folder+"hyperion.config.json",config_folder+"hyperion.config.json_bak")

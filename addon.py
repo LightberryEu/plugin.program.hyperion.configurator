@@ -9,7 +9,7 @@ import urllib2
 
 addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
-addon_dir = xbmc.translatePath( addon.getAddonInfo('path') )
+addon_dir = xbmc.translatePath( addon.getAddonInfo('path'))
 sys.path.append(os.path.join( addon_dir, 'resources', 'lib' ) )
 new_hyperion_config_path = addon_dir+"/hyperion.config.new"
 hyperion_installation_path="/storage/hyperion/bin"
@@ -54,7 +54,12 @@ if not HyperPyCon.HyperPyCon.isHyperionInstalled():
 try:
     if HyperPyCon.HyperPyCon.amIonOSMC():
         settings_cache_path = "/home/osmc/.kodi/userdata/addon_data/plugin.program.hyperion.configurator/settings.xml"
-        default_config_path="/etc/hyperion.config.json"
+        # check if new versio of hyperion is installed
+        if os.path.exists("/opt/hyperion/bin/hyperiond"):
+            default_config_path="/etc/hyperion.config.json"
+        else:
+            default_config_path="/etc/hyperion/hyperion.config.json"
+
         run_command="hyperiond /home/osmc/.kodi/addons/plugin.program.hyperion.configurator-master/hyperion.config.new"
         hyperion_installation_path=""
         subprocess.call(["lsusb"])
