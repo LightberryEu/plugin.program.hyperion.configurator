@@ -38,6 +38,6 @@
 	<category label="Grabber">
 	  <setting label="Video standard" type="select" values="PAL|NTSC" id="videoStandard" default="PAL"/>
 	  <setting label="Color when HDMI signal is off" type="select" values="BLUE|BLACK" id="colorWhenSourceIsOff" default="BLACK"/>
-
+	  <setting label="Grabber priority" type="slider" range="0,10,1200" id="grabberPriority" default="880"/>
     </category>
 </settings>

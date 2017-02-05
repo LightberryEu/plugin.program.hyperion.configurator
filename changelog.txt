@@ -19,3 +19,4 @@
 1.8.1 Lighberry XL color order fix
 1.8.2 Bugfix filling unused leds and hardcoded repo address
 1.9.0 Adjust to new hyperion deafult config folder /etc/hyperion
+1.9.1 Adjust to new hyperion grabber priority logic

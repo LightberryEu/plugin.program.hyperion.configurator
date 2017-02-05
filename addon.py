@@ -126,6 +126,7 @@ try:
     hyperion_configuration.set_blackborderdetection((addon.getSetting("bbdEnabled") == "true"), float(addon.getSetting("bbdThreshold")))
     hyperion_configuration.set_grabber_video_standard(addon.getSetting("videoStandard"))
     hyperion_configuration.set_grabber_signal_off(addon.getSetting("colorWhenSourceIsOff"))
+    hyperion_configuration.set_grabber_priority(int(float(addon.getSetting("grabberPriority"))))
 
     options = ["Right/bottom corner and goes up","Left/bottom corner and goes up","Center/bottom and goes right","Center/bottom and goes left"]
     selected_index = xbmcgui.Dialog().select("Select where the led chain starts:",options)

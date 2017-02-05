@@ -219,6 +219,9 @@ class HyperPyCon:
             self.grabber.green_signal_threshold = 0.1
             self.grabber.blue_signal_threshold = 1.0
 
+    def set_grabber_priority(self, grabber_priority):
+        self.grabber.priority = grabber_priority
+
     def clear_leds(self):
         self.tester.clear_leds()
 
